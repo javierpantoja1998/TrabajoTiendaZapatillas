@@ -20,7 +20,7 @@ body {
     margin: 0
 }
 
-#tit {
+.tit {
     text-transform: uppercase;
     letter-spacing: .5em;
     display: inline-block;
