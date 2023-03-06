@@ -18,7 +18,7 @@ namespace TrabajoTiendaZapatillas.Models
         public string Nombre { get; set; }
 
         [Column("TALLA")]
-        public double Talla { get; set; }
+        public decimal Talla { get; set; }
 
         [Column("UNIDADESTOCK")]
         public int UnidadesStock { get; set; }
@@ -30,6 +30,6 @@ namespace TrabajoTiendaZapatillas.Models
         public string Imagen { get; set; }
 
         [Column("PRECIO")]
-        public int Precio { get; set; }
+        public decimal Precio { get; set; }
     }
 }

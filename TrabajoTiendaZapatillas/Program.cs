@@ -1,8 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using TrabajoTiendaZapatillas.Data;
+using TrabajoTiendaZapatillas.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 string connectionString = builder.Configuration.GetConnectionString("SqlZapatillas");
-
+builder.Services.AddTransient<RepositoryZapatillas>();
+builder.Services.AddDbContext<ZapatillasContext>(options => options.UseSqlServer(connectionString));
 
 
 builder.Services.AddControllersWithViews();
