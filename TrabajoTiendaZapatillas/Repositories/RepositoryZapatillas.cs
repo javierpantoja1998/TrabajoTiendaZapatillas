@@ -1,8 +1,12 @@
-﻿using TrabajoTiendaZapatillas.Data;
+﻿using Microsoft.Data.SqlClient;
+using TrabajoTiendaZapatillas.Data;
 using TrabajoTiendaZapatillas.Models;
 
 namespace TrabajoTiendaZapatillas.Repositories
 {
+    #region
+    
+    #endregion
     public class RepositoryZapatillas
     {
         private ZapatillasContext context;
@@ -18,6 +22,15 @@ namespace TrabajoTiendaZapatillas.Repositories
             var consulta = from datos in context.Zapatillas
                            select datos;
             return consulta.ToList();
+
+        }
+
+        public Zapatilla GetZapatillaId(int idZapatilla)
+        {
+            var consulta = from datos in context.Zapatillas
+                           where datos.IdZapatilla == idZapatilla
+                           select datos;
+            return consulta.FirstOrDefault();
 
         }
     }

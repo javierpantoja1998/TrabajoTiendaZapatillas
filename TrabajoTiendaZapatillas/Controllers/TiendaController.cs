@@ -18,5 +18,17 @@ namespace TrabajoTiendaZapatillas.Controllers
             List<Zapatilla> zapatillas = this.repo.GetZapatillas();
             return View(zapatillas);
         }
+
+        public IActionResult ZapatillaDetalles()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ZapatillaDetalles(int idZapatilla)
+        {
+            Zapatilla zapatilla = repo.GetZapatillaId(idZapatilla);
+            return View(zapatilla);
+        }
     }
 }
