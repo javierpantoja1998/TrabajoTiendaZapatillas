@@ -10,29 +10,247 @@
     <link href="~/lib/fontawesome/css/all.min.css" rel="stylesheet" /><link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
+    <style>
+        @@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body{
+	font-family: 'Roboto', sans-serif;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+i {
+	margin-right: 10px;
+}
+/*----------bootstrap-navbar-css------------*/
+.navbar-logo{
+	padding: 15px;
+	color: #fff;
+}
+.navbar-mainbg{
+	background-color: #5161ce;
+	padding: 0px;
+}
+#navbarSupportedContent{
+	overflow: hidden;
+	position: relative;
+}
+#navbarSupportedContent ul{
+	padding: 0px;
+	margin: 0px;
+}
+#navbarSupportedContent ul li a i{
+	margin-right: 10px;
+}
+#navbarSupportedContent li {
+	list-style-type: none;
+	float: left;
+}
+#navbarSupportedContent ul li a{
+	color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 15px;
+    display: block;
+    padding: 20px 20px;
+    transition-duration:0.6s;
+	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+}
+#navbarSupportedContent>ul>li.active>a{
+	color: #5161ce;
+	background-color: transparent;
+	transition: all 0.7s;
+}
+#navbarSupportedContent a:not(:only-child):after {
+	content: "\f105";
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	font-size: 14px;
+	font-family: "Font Awesome 5 Free";
+	display: inline-block;
+	padding-right: 3px;
+	vertical-align: middle;
+	font-weight: 900;
+	transition: 0.5s;
+}
+#navbarSupportedContent .active>a:not(:only-child):after {
+	transform: rotate(90deg);
+}
+.hori-selector{
+	display:inline-block;
+	position:absolute;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	transition-duration:0.6s;
+	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	background-color: #fff;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	margin-top: 10px;
+}
+.hori-selector .right,
+.hori-selector .left{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	background-color: #fff;
+	bottom: 10px;
+}
+.hori-selector .right{
+	right: -25px;
+}
+.hori-selector .left{
+	left: -25px;
+}
+.hori-selector .right:before,
+.hori-selector .left:before{
+	content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #5161ce;
+}
+.hori-selector .right:before{
+	bottom: 0;
+    right: -25px;
+}
+.hori-selector .left:before{
+	bottom: 0;
+    left: -25px;
+}
+
+
+@@media(min-width: 992px){
+	.navbar-expand-custom {
+	    -ms-flex-flow: row nowrap;
+	    flex-flow: row nowrap;
+	    -ms-flex-pack: start;
+	    justify-content: flex-start;
+	}
+	.navbar-expand-custom .navbar-nav {
+	    -ms-flex-direction: row;
+	    flex-direction: row;
+	}
+	.navbar-expand-custom .navbar-toggler {
+	    display: none;
+	}
+	.navbar-expand-custom .navbar-collapse {
+	    display: -ms-flexbox!important;
+	    display: flex!important;
+	    -ms-flex-preferred-size: auto;
+	    flex-basis: auto;
+	}
+}
+
+
+@@media (max-width: 991px){
+	#navbarSupportedContent ul li a{
+		padding: 12px 30px;
+	}
+	.hori-selector{
+		margin-top: 0px;
+		margin-left: 10px;
+		border-radius: 0;
+		border-top-left-radius: 25px;
+		border-bottom-left-radius: 25px;
+	}
+	.hori-selector .left,
+	.hori-selector .right{
+		right: 10px;
+	}
+	.hori-selector .left{
+		top: -25px;
+		left: auto;
+	}
+	.hori-selector .right{
+		bottom: -25px;
+	}
+	.hori-selector .left:before{
+		left: -25px;
+		top: -25px;
+	}
+	.hori-selector .right:before{
+		bottom: -25px;
+		left: -25px;
+	}
+}
+    </style>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"> 
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Managed" asp-action="Login"><img src="http://cdn.onlinewebfonts.com/svg/img_88236.png" height="30px" width="30px"/></a>
+     <!-- Navbar-->
+     <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <div class="container-fluid justify-content-between">
+            <!-- Left elements -->
+            <div class="d-flex">
+                 <!-- Brand -->
+                   <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+                    <img
+                      src="~/fotos/logo.png" 
+                      height="60"
+                      alt="MDB Logo"
+                      loading="lazy"
+                      style="margin-top: 2px;"
+                    />
+                  </a>
+
+          
+            </div>
+            <!-- Left elements -->
+
+             <!-- Center elements -->
+            <ul class="navbar-nav flex-row d-none d-md-flex">
+              <li class="nav-item"> 
+                            	<a class="nav-link text-dark" asp-area="" asp-controller="Managed" asp-action="Login"><img src="http://cdn.onlinewebfonts.com/svg/img_88236.png" 						height="30px" width="30px"/></a>
                         </li>
+
                         <li class="nav-item"> 
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tienda" asp-action="Index"><img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/1556226/nike-sneaker-clipart-xl.png" width="30px" height="30px" /></a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tienda" asp-action="Index"><img src="https://creazilla-											store.fra1.digitaloceanspaces.com/cliparts/1556226/nike-sneaker-clipart-xl.png" width="30px" height="30px" /></a>
                         </li>
+
                         <li class="nav-item"> 
                             <a class="nav-link text-dark" asp-area="" asp-controller="Tienda" asp-action="ZapatillaDetalles">DETALLES</a>
                         </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+            </ul>
+             <!-- Center elements -->
+
+            <!-- Right elements -->
+            <ul class="navbar-nav flex-row">
+              <li class="nav-item me-3 me-lg-1">
+                <a class="nav-link d-sm-flex align-items-sm-center" href="#">
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
+                    class="rounded-circle"
+                    height="22"
+                    alt="Black and White Portrait of a Man"
+                    loading="lazy"
+                  />
+                  <strong class="d-none d-sm-block ms-1">User</strong>
+                </a>
+              </li>
+             
+         
+           
+              <li class="nav-item dropdown me-3 me-lg-1">
+                <a
+                  class="nav-link dropdown-toggle hidden-arrow"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-chevron-circle-down fa-lg"></i>
+                </a>
+           
+              </li>
+            </ul>
+            <!-- Right elements -->
+    </div>
+</nav>
+<!-- Navbar -->
     </header>
     <div class="container">
         <main role="main" class="pb-3">
