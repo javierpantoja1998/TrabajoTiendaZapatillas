@@ -33,5 +33,14 @@ namespace TrabajoTiendaZapatillas.Repositories
             return consulta.FirstOrDefault();
 
         }
+
+        //Funcion para sacar zapatillas por categoria
+        public List<Zapatilla> zapatillasCategoria(int idCategoria) 
+        {
+            var consulta = from datos in context.Zapatillas
+                           where datos.IdCategoria== idCategoria
+                           select datos;
+            return consulta.ToList();
+        }
     }
 }
