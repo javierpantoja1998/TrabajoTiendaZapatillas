@@ -8,7 +8,8 @@ namespace TrabajoTiendaZapatillas.Data
         public ZapatillasContext(DbContextOptions<ZapatillasContext> options) : base(options) { }
 
         public DbSet<Zapatilla> Zapatillas { get; set; }
-
+        public DbSet<VistaZapatillasCategoria> ZapatillasCategoria { get; set; }
         
+
     }
 }

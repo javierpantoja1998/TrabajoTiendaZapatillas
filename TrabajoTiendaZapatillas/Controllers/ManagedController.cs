@@ -30,15 +30,15 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View();
         }
 
-       /* public IActionResult Register()
+        public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public IActionResult Register(string usuario, string password)
         {
-            if (usuario.ToLower() == "admin" && password.ToLower() == "admin")
+            *//*if (usuario.ToLower() == "admin" && password.ToLower() == "admin")
             {
                 //ALMACENAMOS EL USUARIO EN SESSION
                 HttpContext.Session.SetString("USUARIO", usuario);
@@ -48,7 +48,7 @@ namespace TrabajoTiendaZapatillas.Controllers
             {
 
                 return RedirectToAction("AccesoDenegado");
-            }
+            }*//*
         }*/
     }
 }

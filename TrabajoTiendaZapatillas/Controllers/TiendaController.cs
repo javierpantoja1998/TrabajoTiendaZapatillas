@@ -15,7 +15,7 @@ namespace TrabajoTiendaZapatillas.Controllers
 
         public IActionResult Index()
         {
-            List<Zapatilla> zapatillas = this.repo.GetZapatillas();
+            List<VistaZapatillasCategoria> zapatillas = this.repo.GetZapatillas();
             return View(zapatillas);
         }
 
@@ -42,5 +42,7 @@ namespace TrabajoTiendaZapatillas.Controllers
             List<Zapatilla> zapatillasCategoria =  this.repo.zapatillasCategoria(idCategoria);
             return View(zapatillasCategoria);
         }
+
+       
     }
 }

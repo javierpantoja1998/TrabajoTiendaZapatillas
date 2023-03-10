@@ -17,9 +17,9 @@ namespace TrabajoTiendaZapatillas.Repositories
         }
 
         //Funcion para sacar la lista de las zapatillas
-        public List<Zapatilla> GetZapatillas()
+        public List<VistaZapatillasCategoria> GetZapatillas()
         {
-            var consulta = from datos in context.Zapatillas
+            var consulta = from datos in context.ZapatillasCategoria
                            select datos;
             return consulta.ToList();
 
