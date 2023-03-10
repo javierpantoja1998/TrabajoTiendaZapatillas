@@ -8,6 +8,7 @@ namespace TrabajoTiendaZapatillas.Controllers
     {
         private RepositoryZapatillas repo;
 
+
         public TiendaController(RepositoryZapatillas repo)
         {
             this.repo = repo;
@@ -15,8 +16,22 @@ namespace TrabajoTiendaZapatillas.Controllers
 
         public IActionResult Index()
         {
-            List<VistaZapatillasCategoria> zapatillas = this.repo.GetZapatillas();
-            return View(zapatillas);
+            List<VistaZapatillasCategoria> zapatillasCategoriaBasketball = this.repo.zapatillasCategoria("BASKETBALL");
+            List<VistaZapatillasCategoria> zapatillasCategoriaFutbol = this.repo.zapatillasCategoria("FUTBOL");
+            List<VistaZapatillasCategoria> zapatillasCategoriaSkate = this.repo.zapatillasCategoria("SKATE");
+            List<VistaZapatillasCategoria> zapatillasCategoriaPremium = this.repo.zapatillasCategoria("PREMIUM");
+
+
+            ZapatillaCategoria zapatillaCategoria = new ZapatillaCategoria();
+            zapatillaCategoria.ZapatillasBasket = zapatillasCategoriaBasketball;
+            zapatillaCategoria.ZapatillasFutbol = zapatillasCategoriaFutbol;
+            zapatillaCategoria.ZapatillasSkate = zapatillasCategoriaSkate;
+            zapatillaCategoria.ZapatillasPremium = zapatillasCategoriaPremium;
+
+
+
+
+            return View(zapatillaCategoria);
         }
 
         public IActionResult ZapatillaDetalles()
@@ -37,9 +52,9 @@ namespace TrabajoTiendaZapatillas.Controllers
         }
 
         [HttpPost]
-        public IActionResult ZapatillasCategoria(int idCategoria) 
+        public IActionResult ZapatillasCategoria(string nombreCategoria) 
         {
-            List<Zapatilla> zapatillasCategoria =  this.repo.zapatillasCategoria(idCategoria);
+            List<VistaZapatillasCategoria> zapatillasCategoria =  this.repo.zapatillasCategoria(nombreCategoria);
             return View(zapatillasCategoria);
         }
 

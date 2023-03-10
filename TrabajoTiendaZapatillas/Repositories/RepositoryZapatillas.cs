@@ -35,10 +35,10 @@ namespace TrabajoTiendaZapatillas.Repositories
         }
 
         //Funcion para sacar zapatillas por categoria
-        public List<Zapatilla> zapatillasCategoria(int idCategoria) 
+        public List<VistaZapatillasCategoria> zapatillasCategoria(string nombreCategoria) 
         {
-            var consulta = from datos in context.Zapatillas
-                           where datos.IdCategoria== idCategoria
+            var consulta = from datos in context.ZapatillasCategoria
+                           where datos.NombreCategoria== nombreCategoria
                            select datos;
             return consulta.ToList();
         }

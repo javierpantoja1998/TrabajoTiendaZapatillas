@@ -1,4 +1,4 @@
-﻿@model List<VistaZapatillasCategoria>
+﻿@model ZapatillaCategoria
 
 
 
@@ -9,36 +9,97 @@
     <header class="text-center mb-5">
         <h1 class="tit">  FEEL </h1>
     </header>
-    
-    
-        <div class="row pb-5 mb-4">
-            @foreach (VistaZapatillasCategoria zap in Model)
+
+
+    <div class="row pb-5 mb-4">
+        <h1 style="color:aqua; font-size:70px">BASKET</h1>
+        @foreach (VistaZapatillasCategoria zap in Model.ZapatillasBasket)
         {
-             <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                <!-- Card-->
-                 <div class="card rounded shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-1_gthops.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
-                        <h5> <a href="#" class="text-dark">@zap.Nombre</a></h5>
-                        <p class="small text-muted font-italic">@zap.Descripcion</p>
-                        <ul class="list-inline small">
-                            <li class="list-inline-item m-0">Precio: @zap.Precio<i class="fa fa-star text-success"></i></li>
-                            <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
-                            <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
-                            
-                        </ul>
-                    </div>
+
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <!-- Card-->
+            <div class="card rounded shadow-sm border-0">
+                <div class="card-body p-4">
+                    <img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-1_gthops.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
+                    <h5> <a href="#" class="text-dark">@zap.Nombre</a></h5>
+                    <p class="small text-muted font-italic">@zap.Descripcion</p>
+                    <ul class="list-inline small">
+                        <li class="list-inline-item m-0">Precio: @zap.Precio<i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
+
+                    </ul>
                 </div>
             </div>
-        }
-           
-
         </div>
+        }
 
+        <h1 style="color:aqua; font-size:70px">FUTBOL</h1>
+        @foreach (VistaZapatillasCategoria zap in Model.ZapatillasFutbol)
+        {
 
-    
-    
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <!-- Card-->
+            <div class="card rounded shadow-sm border-0">
+                <div class="card-body p-4">
+                    <img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-1_gthops.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
+                    <h5> <a href="#" class="text-dark">@zap.Nombre</a></h5>
+                    <p class="small text-muted font-italic">@zap.Descripcion</p>
+                    <ul class="list-inline small">
+                        <li class="list-inline-item m-0">Precio: @zap.Precio<i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
 
+                    </ul>
+                </div>
+            </div>
+        </div>
+        }
+
+        <h1 style="color:aqua; font-size:70px">SKATE</h1>
+        @foreach (VistaZapatillasCategoria zap in Model.ZapatillasSkate)
+        {
+
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <!-- Card-->
+            <div class="card rounded shadow-sm border-0">
+                <div class="card-body p-4">
+                    <img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-1_gthops.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
+                    <h5> <a href="#" class="text-dark">@zap.Nombre</a></h5>
+                    <p class="small text-muted font-italic">@zap.Descripcion</p>
+                    <ul class="list-inline small">
+                        <li class="list-inline-item m-0">Precio: @zap.Precio<i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        }
+
+        <h1 style="color:aqua; font-size:70px">PREMIUM</h1>
+        @foreach (VistaZapatillasCategoria zap in Model.ZapatillasPremium)
+        {
+
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <!-- Card-->
+            <div class="card rounded shadow-sm border-0">
+                <div class="card-body p-4">
+                    <img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-1_gthops.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
+                    <h5> <a href="#" class="text-dark">@zap.Nombre</a></h5>
+                    <p class="small text-muted font-italic">@zap.Descripcion</p>
+                    <ul class="list-inline small">
+                        <li class="list-inline-item m-0">Precio: @zap.Precio<i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
 
 
 
