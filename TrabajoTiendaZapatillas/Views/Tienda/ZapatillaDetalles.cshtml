@@ -1,4 +1,5 @@
-﻿
+﻿@model Zapatilla
+
 <html>
     <head>
        
@@ -246,14 +247,17 @@
             }
 
        </style>
-    <div class="container">
+
+    @if (Model != null)
+    {
+            <div class="container">
         <div class="card">
             <div class="card-head">
                 <img src="    https://img.icons8.com/ios7/12x/nike.png" alt="logo" class="card-logo">
                 <img src="https://static.nike.com/a/images/t_default/e66bb813-de06-48b3-a348-d03cae92d48d/dunk-high-retro-zapatillas-Q6sXm5.png" alt="Shoe" class="product-img">
                 <div class="product-detail">
-                    <h2>Hartbeespoort</h2> Support and Nike Zoom Air come together for a more supportive feel with high-speed responsiveness
-                </div>
+                    <h2>@Model.Nombre</h2>
+                    <h4>@Model.Descripcion</h4>
                
             </div>
             <div class="card-body">
@@ -291,13 +295,15 @@
                     </span>
                  
                     <span class="product-price">
-                        USD<b>23,453</b>
+                        USD<b>@Model.Precio</b>
                     </span>
                 </div>
             </div>
         </div>
     </div>
 
+    </div>
+    }
 
 
 
