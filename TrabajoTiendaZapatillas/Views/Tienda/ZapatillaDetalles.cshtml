@@ -1,8 +1,7 @@
-﻿
+﻿@model Zapatilla
+
 <html>
-    <head>
-       
-    </head>
+
     <body>
        <style>
         * {
@@ -244,29 +243,27 @@
             .yt:hover {
                 background: rgba(0,0,0,0.2);
             }
+            /*/////////////////////////*/
+            
 
        </style>
-    <div class="container">
+
+    @if (Model != null)
+    {
+            <div class="container">
         <div class="card">
             <div class="card-head">
                 <img src="    https://img.icons8.com/ios7/12x/nike.png" alt="logo" class="card-logo">
                 <img src="https://static.nike.com/a/images/t_default/e66bb813-de06-48b3-a348-d03cae92d48d/dunk-high-retro-zapatillas-Q6sXm5.png" alt="Shoe" class="product-img">
                 <div class="product-detail">
-                    <h2>Hartbeespoort</h2> Support and Nike Zoom Air come together for a more supportive feel with high-speed responsiveness
-                </div>
+                    <h2>@Model.Nombre</h2>
+                    <h4>Talla: @Model.Talla</h4>
+                    
                
             </div>
             <div class="card-body">
                 <div class="product-desc">
-                    <span class="product-title">
-                        Hartbee<b>spoort</b>
-                        <span class="badge">
-                            New
-                        </span>
-                    </span>
-                    <span class="product-caption">
-                        Basket Ball Collection
-                    </span>
+                  
                     <span class="product-rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -276,28 +273,32 @@
                     </span>
                 </div>
                 <div class="product-properties">
+                    
+                    <span class="product-caption">
+                        
+                    </span>
                     <span class="product-size">
-                        <h4>Size</h4>
-                        <form class="ul-size">
-                            <label>40</label>
-                            <input type="radio" class="form-check-input" value="40"></input>
-                            <label>41</label>
-                            <input type="radio" class="form-check-input" value="41"></input>
-                            <label>42</label>
-                            <input type="radio" class="form-check-input" value="42"></input>
-                            <label>43</label>
-                            <input type="radio" class="form-check-input" value="43"></input>
-                        </form>
+                        
+                        <h4>@Model.Talla</h4>
                     </span>
                  
                     <span class="product-price">
-                        USD<b>23,453</b>
+                        USD<b>@Model.Precio</b>
                     </span>
                 </div>
             </div>
         </div>
     </div>
 
+    </div>
+
+       @* ------------------------------*@
+
+       <div id="contenedorDescrpcion">
+
+       </div>
+
+    }
 
 
 

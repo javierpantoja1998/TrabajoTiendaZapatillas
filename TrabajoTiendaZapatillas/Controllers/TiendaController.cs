@@ -34,17 +34,11 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View(zapatillaCategoria);
         }
 
-        public IActionResult ZapatillaDetalles()
-        {
-            return View();
-        }
-
-        [HttpPost]
         public IActionResult ZapatillaDetalles(int idZapatilla)
         {
-            Zapatilla zapatilla = repo.GetZapatillaId(idZapatilla);
-            return View(zapatilla);
+            return View(repo.GetZapatillaId(idZapatilla));
         }
+
 
         public IActionResult ZapatillasCategoria()
         {

@@ -16,4 +16,8 @@
     <None Include="wwwroot\js\site.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Shared\NewFolder\" />
+  </ItemGroup>
+
 </Project>
