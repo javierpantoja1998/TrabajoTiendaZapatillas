@@ -244,7 +244,12 @@
                 background: rgba(0,0,0,0.2);
             }
             /*/////////////////////////*/
-            
+        #detallesprofundidad{
+            position: fixed;
+            top:450px;
+            text-align:center;
+
+        }
 
        </style>
 
@@ -277,26 +282,34 @@
                     <span class="product-caption">
                         
                     </span>
-                    <span class="product-size">
-                        
-                        <h4>@Model.Talla</h4>
-                    </span>
-                 
+                   
                     <span class="product-price">
-                        USD<b>@Model.Precio</b>
+                        <button class="btn">
+                                    <b>USD @Model.Precio</b>
+                        </button>
+                        
                     </span>
                 </div>
+                    
+                        <div id="detallesprofundidad">
+                            <h5 class="card-title">@Model.Nombre</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Talla: @Model.Talla</h6>
+                            
+                            <p class="card-text">Unidades en stock: @Model.UnidadesStock</p>
+                            <a href="#" class="card-link">Volver</a>
+                        </div>
+
             </div>
         </div>
     </div>
 
     </div>
-
+    <div id="descripcion" style="background-color:deepskyblue"> 
+        <h6 style="color:azure">@Model.Descripcion</h6>
+    </div>
        @* ------------------------------*@
 
-       <div id="contenedorDescrpcion">
-
-       </div>
+       
 
     }
 
