@@ -52,6 +52,11 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View(zapatillasCategoria);
         }
 
+        public IActionResult Carrito()
+        {
+            return View();
+        }
+
        
     }
 }
