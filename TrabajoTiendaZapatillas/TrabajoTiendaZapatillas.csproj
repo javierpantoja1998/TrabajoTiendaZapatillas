@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
     <Folder Include="Views\Shared\NewFolder\" />
   </ItemGroup>
 
