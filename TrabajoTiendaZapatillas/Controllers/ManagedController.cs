@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TrabajoTiendaZapatillas.Models;
 
 namespace TrabajoTiendaZapatillas.Controllers
 {
     public class ManagedController : Controller
     {
+        
         public IActionResult Login()
         {
             return View();
@@ -35,20 +37,18 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View();
         }
 
-        /*[HttpPost]
-        public IActionResult Register(string usuario, string password)
+        [HttpPost]
+        public async Task<IActionResult> Register
+            (string nombre, string email, string password, string imagen)
         {
-            *//*if (usuario.ToLower() == "admin" && password.ToLower() == "admin")
-            {
-                //ALMACENAMOS EL USUARIO EN SESSION
-                HttpContext.Session.SetString("USUARIO", usuario);
-                return RedirectToAction("Productos", "Tienda");
-            }
-            else
-            {
+            Usuario user = new Usuario();
+            string fileName = user.IdUsuario.ToString();
 
-                return RedirectToAction("AccesoDenegado");
-            }*//*
-        }*/
+            
+
+            await this.repo.
+            ViewData["MENSAJE"] = "Usuario regristado correctamente";
+            return View();
+        }
     }
 }
