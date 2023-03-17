@@ -8,6 +8,11 @@ namespace TrabajoTiendaZapatillas.Controllers
     {
         private RepositoryUsuarios repo;
 
+        public ManagedController(RepositoryUsuarios repo)
+        {
+            this.repo = repo;
+        }
+
         public IActionResult Login()
         {
             return View();

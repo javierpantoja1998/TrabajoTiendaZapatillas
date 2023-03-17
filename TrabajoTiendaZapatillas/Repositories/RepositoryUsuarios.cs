@@ -22,7 +22,7 @@ namespace TrabajoTiendaZapatillas.Repositories
             }
             else
             {
-                return this.context.Usuarios.Max(z => z.IdUsuario);
+                return this.context.Usuarios.Max(z => z.IdUsuario)+1;
             }
         }
 

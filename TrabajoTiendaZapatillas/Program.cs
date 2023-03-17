@@ -7,7 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 string connectionString = builder.Configuration.GetConnectionString("SqlZapatillas");
 builder.Services.AddTransient<RepositoryZapatillas>();
+builder.Services.AddTransient<RepositoryUsuarios>();
 builder.Services.AddDbContext<ZapatillasContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<UsuariosContext>(options => options.UseSqlServer(connectionString));
 
 
 builder.Services.AddControllersWithViews();
