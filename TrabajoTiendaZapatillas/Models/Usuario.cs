@@ -14,13 +14,13 @@ namespace TrabajoTiendaZapatillas.Models
         public string Nombre { get; set; }
 
         [Column("DNI")]
-        public int Dni { get; set; }
+        public string Dni { get; set; }
 
         [Column("DIRECCION")]
         public string Direccion { get; set; }
 
         [Column("TELEFONO")]
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
 
         [Column("EMAIL")]
         public string Email { get; set; }
@@ -28,7 +28,7 @@ namespace TrabajoTiendaZapatillas.Models
         [Column("SALT")]
         public string Salt { get; set; }
 
-        [Column("CONTRASEÑA")]
-        public byte[] Contraseña { get; set; }
+        [Column("PASSWORD")]
+        public byte[] Password { get; set; }
     }
 }

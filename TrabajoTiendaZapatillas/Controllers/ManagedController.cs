@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TrabajoTiendaZapatillas.Models;
+using TrabajoTiendaZapatillas.Repositories;
 
 namespace TrabajoTiendaZapatillas.Controllers
 {
     public class ManagedController : Controller
     {
-        
+        private RepositoryUsuarios repo;
+
         public IActionResult Login()
         {
             return View();
@@ -39,14 +41,12 @@ namespace TrabajoTiendaZapatillas.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Register
-            (string nombre, string email, string password, string imagen)
+            (string nombre, string dni, string direccion, string telefono, string email, string password)
         {
             Usuario user = new Usuario();
             string fileName = user.IdUsuario.ToString();
 
-            
-
-            await this.repo.
+            await this.repo.RegisterUser(nombre, dni, direccion, telefono, email, password);
             ViewData["MENSAJE"] = "Usuario regristado correctamente";
             return View();
         }

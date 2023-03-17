@@ -1,4 +1,5 @@
 ﻿using TrabajoTiendaZapatillas.Data;
+using TrabajoTiendaZapatillas.Helpers;
 using TrabajoTiendaZapatillas.Models;
 
 namespace TrabajoTiendaZapatillas.Repositories
@@ -25,15 +26,17 @@ namespace TrabajoTiendaZapatillas.Repositories
             }
         }
 
-        public async Task RegisterUser(string nombre, string email,  string password, string telefono, string direccion)
+        public async Task RegisterUser(string nombre, string dni, string direccion, string telefono, string email, string password)
         {
             Usuario user = new Usuario();
             user.IdUsuario = this.GetMaxIdUsuario();
             user.Nombre = nombre;
-            user.Dni =
-            user.Email = email;
+            user.Dni = dni;
+            user.Direccion = direccion;
             user.Telefono = telefono;
-            user.Direccion
+            user.Email = email;
+
+
             //CADA USER TENDRA UN SALT DISTINTO
             user.Salt = HelperCriptography.GenerateSalt();
             //CIFRAMOS EL PASSWORD DEL USUARIO CON SU SALT

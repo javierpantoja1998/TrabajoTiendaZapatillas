@@ -1,4 +1,7 @@
-﻿namespace TrabajoTiendaZapatillas.Helpers
+﻿using System.Security.Cryptography;
+using System.Text;
+
+namespace TrabajoTiendaZapatillas.Helpers
 {
     public class HelperCriptography
     {
