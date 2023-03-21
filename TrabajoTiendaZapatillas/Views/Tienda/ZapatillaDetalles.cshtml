@@ -30,7 +30,7 @@ img{
 }
 h1{
   	   transition: transform 2s;
-    font-size: 60px;
+    font-size: 35px;
 color: white;
  font-family: 'Big Shoulders Display', cursive;
 }
@@ -111,7 +111,7 @@ border-radius: 500px;
 
   <img src="@Model.Imagen" class="foto" style="width:100%">
 
-     <h1>NIKE AM90id</h1>
+     <h1 style="height:30px">@Model.Nombre</h1>
   </div>
 </div>
 <div class="card-body">
@@ -131,21 +131,24 @@ border-radius: 500px;
 
                     </span>
 
-                    <span class="product-price">
-                        <button class="btn">
-                                    <b> @Model.Precio USD</b>
-                        </button>
-
-                    </span>
+                    
                 </div>
 
                         <div id="detallesprofundidad">
                             <h5 class="card-title">@Model.Nombre</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Talla: @Model.Talla</h6>
 
-                            <p class="card-text">Unidades en stock: UnidadesStock</p>
+                            <p class="card-text">Unidades en stock: @Model.UnidadesStock</p>
                             <a href="#" class="card-link">Volver</a>
+                             <h6 class="card-subtitle mb-2 text-muted">Precio: @Model.Precio</h6>
                         </div>
+
+                        <span class="product-price">
+                        <button class="btn btn-info">
+                                    <b> COMPRAR</b>
+                        </button>
+                        
+                    </span>
 
             </div>
        
