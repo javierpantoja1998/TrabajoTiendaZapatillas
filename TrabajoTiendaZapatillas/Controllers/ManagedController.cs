@@ -19,19 +19,42 @@ namespace TrabajoTiendaZapatillas.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string usuario, string password)
+        //TENGO QUE HACER PRIMERO EL REPO
+        public async Task<IActionResult> Login(string username, string password)
         {
-            if (usuario.ToLower() == "admin" && password.ToLower() == "admin")
+           /* Usuario user = await this.repo.ExisteEmpleado(username, int.Parse(password));
+            if (emp != null)
             {
-                //ALMACENAMOS EL USUARIO EN SESSION
-                HttpContext.Session.SetString("USUARIO", usuario);
-                return RedirectToAction("Productos", "Tienda");
+                ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme,
+                    ClaimTypes.Name, ClaimTypes.Role);
+
+                Claim claimName = new Claim(ClaimTypes.Name, username);
+                identity.AddClaim(claimName);
+
+                Claim claimId = new Claim(ClaimTypes.NameIdentifier, emp.IdEmpleado.ToString());
+                identity.AddClaim(claimId);
+
+                Claim claimOficio = new Claim(ClaimTypes.Role, emp.Oficio);
+                identity.AddClaim(claimOficio);
+
+                Claim claimSalario = new Claim("Salario", emp.Salario.ToString());
+                identity.AddClaim(claimSalario);
+
+                Claim claimDepartamento = new Claim("Departamento", emp.Departamento.ToString());
+                identity.AddClaim(claimDepartamento);
+
+                ClaimsPrincipal userPrincipal = new ClaimsPrincipal(identity);
+
+
+                await HttpContext.SignInAsync
+                    (CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal);
+                return RedirectToAction("PerfilEmpleado", "Empleados");
             }
             else
             {
-                
-                return RedirectToAction("AccesoDenegado");
-            }
+                ViewData["MENSAJE"] = "Usuario/Contraseña incorrectos";
+                return View();
+            }*/
         }
 
         public IActionResult AccesoDenegado()
