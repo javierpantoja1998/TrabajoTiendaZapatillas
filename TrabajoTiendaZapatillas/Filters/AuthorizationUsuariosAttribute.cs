@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace TrabajoTiendaZapatillas.Filters
@@ -7,7 +8,22 @@ namespace TrabajoTiendaZapatillas.Filters
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            throw new NotImplementedException();
+            context.Result = this.GetRoute("Managed", "LogIn");
+        }
+
+        private RedirectToRouteResult GetRoute
+            (string controller, string action)
+        {
+            RouteValueDictionary ruta = new RouteValueDictionary(new
+            {
+                controller = controller,
+                action = action
+            });
+            RedirectToRouteResult result = new RedirectToRouteResult(ruta);
+            return result;
         }
     }
+
+    
 }
+
