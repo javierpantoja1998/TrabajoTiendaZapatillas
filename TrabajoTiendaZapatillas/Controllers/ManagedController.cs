@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using System.Numerics;
+using System.Security.Claims;
 using TrabajoTiendaZapatillas.Models;
 using TrabajoTiendaZapatillas.Repositories;
 
@@ -19,42 +23,45 @@ namespace TrabajoTiendaZapatillas.Controllers
         }
 
         [HttpPost]
-        //TENGO QUE HACER PRIMERO EL REPO
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> LogIn(string email, string password)
         {
-           /* Usuario user = await this.repo.ExisteEmpleado(username, int.Parse(password));
-            if (emp != null)
+            Usuario usuario = await this.repo.ExisteUsuario(email, password);
+            if(usuario != null)
             {
-                ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme,
-                    ClaimTypes.Name, ClaimTypes.Role);
+                ClaimsIdentity identity =
+               new ClaimsIdentity
+               (CookieAuthenticationDefaults.AuthenticationScheme
+               , ClaimTypes.Name, ClaimTypes.Role);
+                identity.AddClaim
+                   (new Claim(ClaimTypes.Name, usuario.Email));
+                identity.AddClaim
+                    (new Claim(ClaimTypes.NameIdentifier, usuario.Password.ToString()));
 
-                Claim claimName = new Claim(ClaimTypes.Name, username);
-                identity.AddClaim(claimName);
-
-                Claim claimId = new Claim(ClaimTypes.NameIdentifier, emp.IdEmpleado.ToString());
-                identity.AddClaim(claimId);
-
-                Claim claimOficio = new Claim(ClaimTypes.Role, emp.Oficio);
-                identity.AddClaim(claimOficio);
-
-                Claim claimSalario = new Claim("Salario", emp.Salario.ToString());
-                identity.AddClaim(claimSalario);
-
-                Claim claimDepartamento = new Claim("Departamento", emp.Departamento.ToString());
-                identity.AddClaim(claimDepartamento);
-
-                ClaimsPrincipal userPrincipal = new ClaimsPrincipal(identity);
-
+                ClaimsPrincipal user = new ClaimsPrincipal(identity);
 
                 await HttpContext.SignInAsync
-                    (CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal);
-                return RedirectToAction("PerfilEmpleado", "Empleados");
+                    (CookieAuthenticationDefaults.AuthenticationScheme
+                    , user);
+                string controller = TempData["controller"].ToString();
+                string action = TempData["action"].ToString();
+                string id = TempData["id"].ToString();
+
+                return RedirectToAction(action, controller
+                    , new { id = id });
             }
             else
             {
-                ViewData["MENSAJE"] = "Usuario/Contraseña incorrectos";
+                ViewData["MENSAJE"] = "Usuario/Password incorrectos";
                 return View();
-            }*/
+            }
+        }
+
+        //LOG OUT
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync
+                (CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Tienda");
         }
 
         public IActionResult AccesoDenegado()
