@@ -1,4 +1,6 @@
-﻿using TrabajoTiendaZapatillas.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Text;
+using TrabajoTiendaZapatillas.Data;
 using TrabajoTiendaZapatillas.Helpers;
 using TrabajoTiendaZapatillas.Models;
 
@@ -12,7 +14,10 @@ namespace TrabajoTiendaZapatillas.Repositories
         {
             this.context = context;
         }
-
+        // FUNCIONALIDAD DEL REGISTRO
+            
+        ///////
+     
         //Funcion para sacar el id maximo
         private int GetMaxIdUsuario()
         {
@@ -43,6 +48,38 @@ namespace TrabajoTiendaZapatillas.Repositories
             user.Password = HelperCriptography.EncriptPassword(password, user.Salt);
             this.context.Usuarios.Add(user);
             await this.context.SaveChangesAsync();
+        }
+        ////////////////
+        
+        // FUNCIONALIDAD DEL LOGIN
+
+        //FUNCION PARA BUSCAR USUARIO
+        public async Task<Usuario> FindUsuarioAsync(int idUsuario)
+        {
+            Usuario usuario =
+                await this.context.Usuarios.FirstOrDefaultAsync
+                (x => x.IdUsuario == idUsuario);
+            return usuario;
+        }
+
+        //FUNCION PARA SACAR LOS USUARIOS
+        public async Task <List<Usuario>> GetUsuariosAsync()
+        {
+            return await this.context.Usuarios.ToListAsync();
+        }
+
+        //FUNCION PARA SABER SI EXISTE UN USUARIO
+        public async Task<Usuario> ExisteUsuario(string email, string password)
+        {
+            //convertimos la cadena de texto password
+            //a un array de bytes utilizando la codificación UTF-8. 
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            //utilizamos el método SequenceEqual
+            //para comparar los dos arrays de bytes. 
+            var usuario = await this.context.Usuarios.FirstOrDefaultAsync(
+                x => x.Email == email && x.Password.SequenceEqual(passwordBytes));
+            //Devolvemos el usuario
+            return usuario;
         }
     }
 }
