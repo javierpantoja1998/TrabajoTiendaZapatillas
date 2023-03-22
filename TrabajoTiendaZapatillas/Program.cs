@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using TrabajoTiendaZapatillas.Data;
 using TrabajoTiendaZapatillas.Repositories;
@@ -12,7 +13,28 @@ builder.Services.AddDbContext<ZapatillasContext>(options => options.UseSqlServer
 builder.Services.AddDbContext<UsuariosContext>(options => options.UseSqlServer(connectionString));
 
 
-builder.Services.AddControllersWithViews();
+//SEGURIDAD
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(
+    CookieAuthenticationDefaults.AuthenticationScheme,
+    config =>
+    {
+        config.AccessDeniedPath = "/Managed/ErrorAcceso";
+    });
+
+
+//FUNCIONES DE CACHE Y SESSION
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
+//LLAMAMOS A NUESTRAS VISTAS
+builder.Services.AddControllersWithViews(options =>
+options.EnableEndpointRouting = false)
+    .AddSessionStateTempDataProvider();
 
 var app = builder.Build();
 
@@ -24,15 +46,20 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Tienda}/{action=Index}");
+app.UseMvc(route =>
+{
+    route.MapRoute(
+        name: "default",
+        template: "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.Run();
