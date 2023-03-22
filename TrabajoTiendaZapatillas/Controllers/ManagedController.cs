@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Numerics;
 using System.Security.Claims;
+using TrabajoTiendaZapatillas.Filters;
 using TrabajoTiendaZapatillas.Models;
 using TrabajoTiendaZapatillas.Repositories;
 
@@ -56,6 +57,7 @@ namespace TrabajoTiendaZapatillas.Controllers
             }
         }
 
+        [AuthorizationUsuarios]
         public IActionResult PerfilUsuario()
         {
             return View();
