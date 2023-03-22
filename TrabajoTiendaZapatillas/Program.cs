@@ -59,7 +59,7 @@ app.UseMvc(route =>
 {
     route.MapRoute(
         name: "default",
-        template: "{controller=Home}/{action=Index}/{id?}");
+        template: "{controller=Tienda}/{action=Index}/{id?}");
 });
 
 app.Run();
