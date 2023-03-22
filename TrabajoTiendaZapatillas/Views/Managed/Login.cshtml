@@ -34,8 +34,8 @@
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="text" name="usuario" class="form-control" />
-                <label class="form-label" for="usuario">Email</label>
+                <input type="text" name="email" class="form-control" />
+                <label class="form-label" for="email">Email</label>
               </div>
 
               <!-- Password input -->
@@ -43,6 +43,8 @@
                 <input type="password" name="password" class="form-control" />
                 <label class="form-label" for="password">Contraseña</label>
               </div>
+
+              @ViewData["MENSAJE"]
 
 
                 <button  class="btn btn-primary btn-block mb-4">

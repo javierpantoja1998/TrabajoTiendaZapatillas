@@ -62,6 +62,15 @@ namespace TrabajoTiendaZapatillas.Repositories
             return usuario;
         }
 
+        public async Task<Usuario> FindEmailAsync(string email)
+        {
+            Usuario usuario =
+                await this.context.Usuarios.FirstOrDefaultAsync
+                (x => x.Email == email);
+            return usuario;
+        }
+
+
         //FUNCION PARA SACAR LOS USUARIOS
         public async Task <List<Usuario>> GetUsuariosAsync()
         {
@@ -71,13 +80,11 @@ namespace TrabajoTiendaZapatillas.Repositories
         //FUNCION PARA SABER SI EXISTE UN USUARIO
         public async Task<Usuario> ExisteUsuario(string email, string password)
         {
-            //convertimos la cadena de texto password
-            //a un array de bytes utilizando la codificación UTF-8. 
-            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            Usuario user = await this.FindEmailAsync(email);
+            
             //utilizamos el método SequenceEqual
             //para comparar los dos arrays de bytes. 
-            var usuario = await this.context.Usuarios.FirstOrDefaultAsync(
-                x => x.Email == email && x.Password.SequenceEqual(passwordBytes));
+            var usuario = await this.context.Usuarios.Where(x => x.Email == email && x.Password == HelperCriptography.EncriptPassword(password, user.Salt)).FirstOrDefaultAsync();
             //Devolvemos el usuario
             return usuario;
         }
