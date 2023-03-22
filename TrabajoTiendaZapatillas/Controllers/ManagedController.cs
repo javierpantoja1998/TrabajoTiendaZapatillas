@@ -56,6 +56,11 @@ namespace TrabajoTiendaZapatillas.Controllers
             }
         }
 
+        public IActionResult PerfilUsuario()
+        {
+            return View();
+        }
+
         //LOG OUT
         public async Task<IActionResult> LogOut()
         {
