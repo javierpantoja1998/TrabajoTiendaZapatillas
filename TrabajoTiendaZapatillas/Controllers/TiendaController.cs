@@ -53,7 +53,7 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View(zapatillasCategoria);
         }
 
-        [AuthorizationUsuarios]
+        /*[AuthorizationUsuarios]*/
         public IActionResult Carrito()
         {
             return View();

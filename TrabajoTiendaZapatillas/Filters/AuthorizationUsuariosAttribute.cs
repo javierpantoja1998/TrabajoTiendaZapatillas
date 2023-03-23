@@ -11,9 +11,9 @@ namespace TrabajoTiendaZapatillas.Filters
 
             //NOS DA IGUAL QUIEN SE HA VALIDADO POR AHORA
             var user = context.HttpContext.User;
-            if (user.Identity.IsAuthenticated != false)
+            if (user.Identity.IsAuthenticated == false)
             {
-                context.Result = this.GetRoute("Managed", "LogIn");
+                context.Result = this.GetRoute("Tienda", "Carrito");
             }
             else
             {
