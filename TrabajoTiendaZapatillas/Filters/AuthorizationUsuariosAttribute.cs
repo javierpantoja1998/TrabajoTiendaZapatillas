@@ -8,7 +8,20 @@ namespace TrabajoTiendaZapatillas.Filters
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            context.Result = this.GetRoute("Managed", "LogIn");
+
+            //NOS DA IGUAL QUIEN SE HA VALIDADO POR AHORA
+            var user = context.HttpContext.User;
+            if (user.Identity.IsAuthenticated != false)
+            {
+                context.Result = this.GetRoute("Managed", "LogIn");
+            }
+            else
+            {
+                
+                    context.Result = this.GetRoute("Managed", "AccesoDenegado");
+                
+
+            }
         }
 
         private RedirectToRouteResult GetRoute
