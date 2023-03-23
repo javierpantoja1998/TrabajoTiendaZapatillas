@@ -82,7 +82,6 @@ namespace TrabajoTiendaZapatillas.Repositories
         {
             Usuario user = await this.FindEmailAsync(email);
             
-            //utilizamos el método SequenceEqual
             //para comparar los dos arrays de bytes. 
             var usuario = await this.context.Usuarios.Where(x => x.Email == email && x.Password == HelperCriptography.EncriptPassword(password, user.Salt)).FirstOrDefaultAsync();
             //Devolvemos el usuario
