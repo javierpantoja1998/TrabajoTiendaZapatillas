@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TrabajoTiendaZapatillas.Filters;
 using TrabajoTiendaZapatillas.Models;
 using TrabajoTiendaZapatillas.Repositories;
 
@@ -52,6 +53,7 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View(zapatillasCategoria);
         }
 
+        [AuthorizationUsuarios]
         public IActionResult Carrito()
         {
             return View();
