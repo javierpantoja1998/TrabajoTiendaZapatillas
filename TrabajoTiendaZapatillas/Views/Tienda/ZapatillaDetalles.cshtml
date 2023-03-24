@@ -1,5 +1,9 @@
 ﻿@model Zapatilla
 
+@{
+    
+    List<int> carrito = Context.Session.GetObject<List<int>>("CARRITO");
+}
 <html>
 
     <body>
@@ -146,13 +150,13 @@ border-radius: 500px;
                         <span class="product-price">
                         <button class="btn btn-info">
                                     <i class="fa fa-star text-success">
-                                @if(carrito != null && carrito.Contains(zap.IdZapatilla))
+                                @if (carrito != null && carrito.Contains(@Model.IdZapatilla))
                                 {
                                     <button disabled class="btn btn-outline-danger disabled">En carrito</button>
                                 }
                                 else
                                 {
-                                    <a class="btn btn-outline-success" asp-action="Carrito" asp-controller="Tienda" asp-route-idzapatilla="@zap.IdZapatilla" asp-route-idzapatilla="@zap.IdZapatillaCarrito">
+                                    <a class="btn btn-outline-success" asp-action="ZapatillaDetalles" asp-controller="Tienda" asp-route-idzapatilla="@Model.IdZapatilla" asp-route-idzapatillaCarrito="@Model.IdZapatilla">
                                         Añadir a carrito
                                     </a>
                                 }

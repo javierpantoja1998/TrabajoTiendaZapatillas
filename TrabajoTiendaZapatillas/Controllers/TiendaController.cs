@@ -76,27 +76,7 @@ namespace TrabajoTiendaZapatillas.Controllers
 
 
 
-        public IActionResult GetZapatillasCarrito(int? idzapatilla)
-        {
-            if(idzapatilla != null)
-            {
-                List<int> carrito;
-                if (HttpContext.Session.GetObject<List<int>>("CARRITO") == null)
-                {
-                    carrito = new List<int>();
-                }
-                else
-                {
-                    carrito = HttpContext.Session.GetObject<List<int>>("CARRITO");
-                }
-                carrito.Add(idzapatilla.Value);
-                HttpContext.Session.SetObject("CARRITO", carrito);
-                
-
-            }
-            List<VistaZapatillasCategoria> zapatillas = this.repo.GetZapatillas();
-            return View(zapatillas);
-        }
+       
 
 
 
@@ -104,6 +84,7 @@ namespace TrabajoTiendaZapatillas.Controllers
         public IActionResult Carrito(int? idzapatilla)
         {
             List<int> carrito = HttpContext.Session.GetObject<List<int>>("CARRITO");
+            //TIENES QUE CREAR PARA AÑADIR DATOS AL CARRITO
             if(carrito == null)
             {
                 return View();

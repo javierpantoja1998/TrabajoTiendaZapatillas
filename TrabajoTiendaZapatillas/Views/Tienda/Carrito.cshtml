@@ -1,4 +1,4 @@
-﻿@model List<VistaZapatillasCategoria>
+﻿@model List<Zapatilla>
 
 @{
     ViewData["Title"] = "Carrito";
@@ -61,7 +61,7 @@ border-bottom-right-radius: 16px;
                 <div class="p-5">
             
                   <hr class="my-4">
-                  @foreach (VistaZapatillasCategoria zap in Model)
+                  @foreach (Zapatilla zap in Model)
                   {
                       <div class="row mb-4 d-flex justify-content-between align-items-center">
                     <div class="col-md-2 col-lg-2 col-xl-2">
@@ -70,7 +70,7 @@ border-bottom-right-radius: 16px;
                         class="img-fluid rounded-3" alt="zapatilla imagen">
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-3">
-                      <h6 class="text-muted">@zap.NombreCategoria</h6>
+                      
                       <h6 class="text-black mb-0">@zap.Nombre</h6>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
