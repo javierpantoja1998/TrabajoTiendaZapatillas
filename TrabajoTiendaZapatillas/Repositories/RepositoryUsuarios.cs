@@ -62,6 +62,7 @@ namespace TrabajoTiendaZapatillas.Repositories
             return usuario;
         }
 
+        //FUNCION PARA SACAR LOS USUARIOS
         public async Task<Usuario> FindEmailAsync(string email)
         {
             Usuario usuario =
@@ -83,7 +84,8 @@ namespace TrabajoTiendaZapatillas.Repositories
             Usuario user = await this.FindEmailAsync(email);
             
             //para comparar los dos arrays de bytes. 
-            var usuario = await this.context.Usuarios.Where(x => x.Email == email && x.Password == HelperCriptography.EncriptPassword(password, user.Salt)).FirstOrDefaultAsync();
+            var usuario = await this.context.Usuarios.Where
+                (x => x.Email == email && x.Password == HelperCriptography.EncriptPassword(password, user.Salt)).FirstOrDefaultAsync();
             //Devolvemos el usuario
             return usuario;
         }
