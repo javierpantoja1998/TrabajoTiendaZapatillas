@@ -52,6 +52,51 @@ namespace TrabajoTiendaZapatillas.Repositories
             return consulta.ToList();
         }
 
-       
+        //Funcion para sacar el id
+        
+
+        private int GetMaximoIdVenta()
+        {
+            var maximo = (from datos in this.context.Ventas
+                          select datos).Max(x => x.IdVenta) + 1;
+            return maximo;
+        }
+
+        public Venta InsertVentas(int idZapatilla, int idUsuario, int numComprobante, DateTime fecha, int impuesto, int total)
+        {
+            Venta venta = new Venta();
+            
+            int maximoIdVenta= this.GetMaximoIdVenta();
+            venta.
+        }
+
+
+        public async Task AgregarProductoAsync
+ (string titulo, int precio, string descripcion,
+ string imagen, int idartista)
+        {
+            InfoArte prod = new InfoArte();
+
+
+
+            int maximo = this.GetMaximoIdArtista();
+
+
+
+            prod.IdInfoArte = maximo;
+            prod.Titulo = titulo;
+            prod.Precio = precio;
+            prod.Descripcion = descripcion;
+            prod.Imagen = imagen;
+            prod.IdArtista = idartista;
+
+
+
+            this.context.InfoArtes.Add(prod);
+
+
+
+            await this.context.SaveChangesAsync();
+        }
     }
 }

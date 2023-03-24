@@ -17,7 +17,7 @@ namespace TrabajoTiendaZapatillas.Models
         public int IdUsuario { get; set; }
 
         [Column("NUMEROCOMPROBANTE")]
-        public int NumeroComprobante { get; set; }
+        public string NumeroComprobante { get; set; }
 
         [Column("FECHA")]
         public DateTime Fecha { get; set; }
@@ -26,6 +26,9 @@ namespace TrabajoTiendaZapatillas.Models
         public int Impuesto { get; set; }
 
         [Column("TOTAL")]
+        public int Total { get; set; }
+
+        [Column("NOMBREZAPATILLA")]
         public int Total { get; set; }
     }
 }

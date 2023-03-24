@@ -10,6 +10,7 @@ namespace TrabajoTiendaZapatillas.Data
         public DbSet<Zapatilla> Zapatillas { get; set; }
         public DbSet<VistaZapatillasCategoria> ZapatillasCategoria { get; set; }
         
+        public DbSet<Venta> Ventas { get; set; }
 
     }
 }
