@@ -199,7 +199,11 @@
           
             </div>
             <!-- Left elements -->
-
+			<ul class="navbar-nav flex-row d-none d-md-flex">
+              <li class="nav-item"> 
+                            	<a class="nav-link text-dark" asp-area="" asp-controller="Tienda" asp-action="Index">Tienda</a>
+              </li>        
+            </ul>
              <!-- Center elements -->
             <ul class="navbar-nav flex-row d-none d-md-flex">
               <li class="nav-item"> 
@@ -235,25 +239,15 @@
                     alt="Black and White Portrait of a Man"
                     loading="lazy"
                   />
-                  <strong class="d-none d-sm-block ms-1">User</strong>
+                  <strong class="d-none d-sm-block ms-1">
+								<partial name="_MenuUsuario" />
+				  </strong>
                 </a>
               </li>
              
-				<partial name="_MenuUsuario"/>
+				
            
-              <li class="nav-item dropdown me-3 me-lg-1">
-                <a
-                  class="nav-link dropdown-toggle hidden-arrow"
-                  href="#"
-                  id="navbarDropdownMenuLink"
-                  role="button"
-                  data-mdb-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-chevron-circle-down fa-lg"></i>
-                </a>
            
-              </li>
             </ul>
             <!-- Right elements -->
     </div>

@@ -3,7 +3,7 @@
         <a class="nav-link text-dark" 
             asp-controller="Managed" 
             asp-action="PerfilUsuario">
-            Log In
+            Amigo no identificado
         </a>
     </li>
 }else{
@@ -11,7 +11,7 @@
         <a class="nav-link text-dark"
             asp-controller="Managed"
             asp-action="LogOut">
-            Log Out <span style="color:fuchsia">
+            Log Out <span style="color:salmon">
                 @Context.User.Identity.Name
             </span>
         </a>
