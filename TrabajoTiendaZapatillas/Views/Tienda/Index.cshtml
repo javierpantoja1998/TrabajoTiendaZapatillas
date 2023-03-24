@@ -30,22 +30,6 @@
                         <li class="list-inline-item m-0">Precio: @zap.Precio<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
-
-
-                        <li class="list-inline-item m-0">
-                            <i class="fa fa-star text-success">
-                                @if(carrito != null && carrito.Contains(zap.IdZapatilla))
-                                {
-                                    <button disabled class="btn btn-outline-danger disabled">En carrito</button>
-                                }
-                                else
-                                {
-                                    <a class="btn btn-outline-success" asp-action="GetZapatillasCarrito" asp-controller="Tienda" asp-route-idzapatilla="@zap.IdZapatilla">
-                                        Añadir a carrito
-                                    </a>
-                                }
-                            </i>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -91,21 +75,6 @@
                         <li class="list-inline-item m-0">Precio: @zap.Precio<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
-                        <li class="list-inline-item m-0">
-                            <i class="fa fa-star text-success">
-                                @if(carrito != null && carrito.Contains(zap.IdZapatilla))
-                                {
-                                    <button disabled class="btn btn-outline-danger disabled">En carrito</button>
-                                }
-                                else
-                                {
-                                    <a class="btn btn-outline-success" asp-action="Carrito" asp-controller="Tienda" asp-route-idzapatilla="@zap.IdZapatilla">
-                                        Añadir a carrito
-                                    </a>
-                                }
-                            </i>
-                        </li>
-
                     </ul>
                 </div>
             </div>
@@ -128,20 +97,6 @@
                         <li class="list-inline-item m-0">Precio: @zap.Precio<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
-                        <li class="list-inline-item m-0">
-                            <i class="fa fa-star text-success">
-                                @if(carrito != null && carrito.Contains(zap.IdZapatilla))
-                                {
-                                    <button disabled class="btn btn-outline-danger disabled">En carrito</button>
-                                }
-                                else
-                                {
-                                    <a class="btn btn-outline-success" asp-action="Carrito" asp-controller="Tienda" asp-route-idproducto="@zap.IdZapatilla">
-                                        Añadir a carrito
-                                    </a>
-                                }
-                            </i>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -153,8 +108,8 @@
 
 
     <!-- First Row [Statistics]-->
-    <h2 class="font-weight-bold mb-2">Latest Statistics</h2>
-    <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+    <h2 class="font-weight-bold mb-2">CALZADO PARA HOMBRE</h2>
+    <p class="font-italic text-muted mb-4">Nuestras victorias son fruto de nuestro esfuerzo.las zapatillas nos ayudan a alcanzar nuestra mejor versión. Por eso queremos correr ese kilómetro extra.  No importa si hoy toca entrenar piernas, salir a correr o jugar al fútbol. Tenemos todo lo que necesitas.</p>
 
 
 </div>

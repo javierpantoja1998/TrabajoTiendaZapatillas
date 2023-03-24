@@ -62,13 +62,13 @@ namespace TrabajoTiendaZapatillas.Repositories
             return maximo;
         }
 
-        public Venta InsertVentas(int idZapatilla, int idUsuario, int numComprobante, DateTime fecha, int impuesto, int total)
+       /* public Venta InsertVentas(int idZapatilla, int idUsuario, int numComprobante, DateTime fecha, int impuesto, int total)
         {
             Venta venta = new Venta();
             
             int maximoIdVenta= this.GetMaximoIdVenta();
-            /*venta.*/
-        }
+            *//*venta.*//*
+        }*/
         //conexion azure BBDD -> sqljavi.database.windows.net
 
 
