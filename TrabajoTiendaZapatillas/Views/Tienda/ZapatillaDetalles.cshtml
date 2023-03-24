@@ -105,6 +105,11 @@ border-radius: 500px;
     position: relative;
   }
 
+  .detallesprofundidad{
+            
+            top: 0%;
+            left: 50%;
+  }
        </style>
 
     @if (Model != null)
@@ -120,36 +125,16 @@ border-radius: 500px;
 </div>
 <div class="card-body">
                 <div class="product-desc">
-
-                    <span class="product-rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star grey"></i>
-                    </span>
-                </div>
-                <div class="product-properties">
-
-                    <span class="product-caption">
-
-                    </span>
-
-                    
-                </div>
-
-                        <div id="detallesprofundidad">
+                     <div id="detallesprofundidad">
                             <h5 class="card-title">@Model.Nombre</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Talla: @Model.Talla</h6>
 
                             <p class="card-text">Unidades en stock: @Model.UnidadesStock</p>
                             <a href="#" class="card-link">Volver</a>
                              <h6 class="card-subtitle mb-2 text-muted">Precio: @Model.Precio</h6>
-                        </div>
-
-                        <span class="product-price">
+                    <span class="product-price">
                         <button class="btn btn-info">
-                                    <i class="fa fa-star text-success">
+                            <i class="fa fa-star text-success">
                                 @if (carrito != null && carrito.Contains(@Model.IdZapatilla))
                                 {
                                     <button disabled class="btn btn-outline-danger disabled">En carrito</button>
@@ -162,8 +147,30 @@ border-radius: 500px;
                                 }
                             </i>
                         </button>
-                        
+
                     </span>
+                        </div>
+
+                            <span class="product-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star grey"></i>
+                            </span>
+                </div>
+                <div class="product-properties">
+
+                    <span class="product-caption">
+
+                    </span>
+
+                    
+                </div>
+
+                       
+
+                        
 
             </div>
        
