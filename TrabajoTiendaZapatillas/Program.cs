@@ -27,14 +27,18 @@ builder.Services.AddAuthentication(options =>
     });
 
 
-//FUNCIONES DE CACHE Y SESSION
-builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession();
 
 //LLAMAMOS A NUESTRAS VISTAS
+
+//FUNCIONES DE CACHE Y SESSION
+
+builder.Services.AddSession();
 builder.Services.AddControllersWithViews(options =>
 options.EnableEndpointRouting = false)
     .AddSessionStateTempDataProvider();
+
+
+
 
 var app = builder.Build();
 
@@ -55,6 +59,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseSession();
 app.UseMvc(route =>
 {
     route.MapRoute(

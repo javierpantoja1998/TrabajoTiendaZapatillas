@@ -145,7 +145,18 @@ border-radius: 500px;
 
                         <span class="product-price">
                         <button class="btn btn-info">
-                                    <b> COMPRAR</b>
+                                    <i class="fa fa-star text-success">
+                                @if(carrito != null && carrito.Contains(zap.IdZapatilla))
+                                {
+                                    <button disabled class="btn btn-outline-danger disabled">En carrito</button>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-outline-success" asp-action="Carrito" asp-controller="Tienda" asp-route-idzapatilla="@zap.IdZapatilla" asp-route-idzapatilla="@zap.IdZapatillaCarrito">
+                                        Añadir a carrito
+                                    </a>
+                                }
+                            </i>
                         </button>
                         
                     </span>

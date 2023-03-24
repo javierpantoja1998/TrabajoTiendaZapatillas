@@ -2,6 +2,8 @@
 using TrabajoTiendaZapatillas.Filters;
 using TrabajoTiendaZapatillas.Models;
 using TrabajoTiendaZapatillas.Repositories;
+using TrabajoTiendaZapatillas.Extensions;
+
 
 namespace TrabajoTiendaZapatillas.Controllers
 {
@@ -30,14 +32,33 @@ namespace TrabajoTiendaZapatillas.Controllers
             zapatillaCategoria.ZapatillasPremium = zapatillasCategoriaPremium;
 
 
-
+            ////////////////////////////
+            
 
             return View(zapatillaCategoria);
         }
 
-        public IActionResult ZapatillaDetalles(int idZapatilla)
+        public IActionResult ZapatillaDetalles(int idZapatilla, int?  idZapatillaCarrito)
         {
-            return View(repo.GetZapatillaId(idZapatilla));
+            if (idZapatillaCarrito != null)
+            {
+                List<int> carrito;
+                if (HttpContext.Session.GetObject<List<int>>("CARRITO") == null)
+                {
+                    carrito = new List<int>();
+                }
+                else
+                {
+                    carrito = HttpContext.Session.GetObject<List<int>>("CARRITO");
+                }
+                carrito.Add(idZapatillaCarrito.Value);
+                HttpContext.Session.SetObject("CARRITO", carrito);
+
+
+            }
+            Zapatilla zapatillas = this.repo.GetZapatillaId(idZapatilla);
+            return View(zapatillas);
+            
         }
 
 
@@ -53,12 +74,62 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View(zapatillasCategoria);
         }
 
-        /*[AuthorizationUsuarios]*/
-        public IActionResult Carrito()
+
+
+        public IActionResult GetZapatillasCarrito(int? idzapatilla)
         {
-            return View();
+            if(idzapatilla != null)
+            {
+                List<int> carrito;
+                if (HttpContext.Session.GetObject<List<int>>("CARRITO") == null)
+                {
+                    carrito = new List<int>();
+                }
+                else
+                {
+                    carrito = HttpContext.Session.GetObject<List<int>>("CARRITO");
+                }
+                carrito.Add(idzapatilla.Value);
+                HttpContext.Session.SetObject("CARRITO", carrito);
+                
+
+            }
+            List<VistaZapatillasCategoria> zapatillas = this.repo.GetZapatillas();
+            return View(zapatillas);
         }
 
-       
+
+
+        /*[AuthorizationUsuarios]*/
+        public IActionResult Carrito(int? idzapatilla)
+        {
+            List<int> carrito = HttpContext.Session.GetObject<List<int>>("CARRITO");
+            if(carrito == null)
+            {
+                return View();
+            }
+            else
+            {
+                if(idzapatilla != null)
+                {
+                    carrito.Remove(idzapatilla.Value);
+                    HttpContext.Session.SetObject("CARRITO", carrito);
+                }
+                List<Zapatilla> productos = this.repo.GetZapatillasCarrito(carrito);
+                return View(productos);
+            }
+            
+        }
+
+        public IActionResult Pedidos()
+        {
+            List<int> carrito = HttpContext.Session.GetObject<List<int>>("CARRITO");
+            List<Zapatilla> zapatillas = this.repo.GetZapatillasCarrito(carrito);
+            HttpContext.Session.Remove("CARRITO");
+            return View(zapatillas);
+        }
+
+
+
     }
 }

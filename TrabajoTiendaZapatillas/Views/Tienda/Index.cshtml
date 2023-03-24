@@ -1,7 +1,10 @@
-﻿@model ZapatillaCategoria
+﻿@using TrabajoTiendaZapatillas.Extensions
+@model ZapatillaCategoria
 
 
-
+@{
+    List<int> carrito = Context.Session.GetObject<List<int>>("CARRITO");
+}
 
 <div class="container py-5">
     <!-- For Demo Purpose-->
@@ -28,6 +31,21 @@
                         <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
 
+
+                        <li class="list-inline-item m-0">
+                            <i class="fa fa-star text-success">
+                                @if(carrito != null && carrito.Contains(zap.IdZapatilla))
+                                {
+                                    <button disabled class="btn btn-outline-danger disabled">En carrito</button>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-outline-success" asp-action="GetZapatillasCarrito" asp-controller="Tienda" asp-route-idzapatilla="@zap.IdZapatilla">
+                                        Añadir a carrito
+                                    </a>
+                                }
+                            </i>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -49,7 +67,9 @@
                         <li class="list-inline-item m-0">Precio: @zap.Precio<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
-
+                        <li class="list-inline-item m-0">
+                            
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -71,7 +91,20 @@
                         <li class="list-inline-item m-0">Precio: @zap.Precio<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
-                        
+                        <li class="list-inline-item m-0">
+                            <i class="fa fa-star text-success">
+                                @if(carrito != null && carrito.Contains(zap.IdZapatilla))
+                                {
+                                    <button disabled class="btn btn-outline-danger disabled">En carrito</button>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-outline-success" asp-action="Carrito" asp-controller="Tienda" asp-route-idzapatilla="@zap.IdZapatilla">
+                                        Añadir a carrito
+                                    </a>
+                                }
+                            </i>
+                        </li>
 
                     </ul>
                 </div>
@@ -95,7 +128,20 @@
                         <li class="list-inline-item m-0">Precio: @zap.Precio<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0">Talla: @zap.Talla<i class="fa fa-star text-success"></i></li>
                         <li class="list-inline-item m-0"> Unidades stock: @zap.UnidadesStock<i class="fa fa-star text-success"></i></li>
-
+                        <li class="list-inline-item m-0">
+                            <i class="fa fa-star text-success">
+                                @if(carrito != null && carrito.Contains(zap.IdZapatilla))
+                                {
+                                    <button disabled class="btn btn-outline-danger disabled">En carrito</button>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-outline-success" asp-action="Carrito" asp-controller="Tienda" asp-route-idproducto="@zap.IdZapatilla">
+                                        Añadir a carrito
+                                    </a>
+                                }
+                            </i>
+                        </li>
                     </ul>
                 </div>
             </div>
