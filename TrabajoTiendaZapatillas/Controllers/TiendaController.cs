@@ -41,6 +41,7 @@ namespace TrabajoTiendaZapatillas.Controllers
         public IActionResult ZapatillaDetalles(int idZapatilla, int?  idZapatillaCarrito)
         {
             if (idZapatillaCarrito != null)
+                //GUARDAMOS EL PRODUCTO EN EL CARRITO
             {
                 List<int> carrito;
                 if (HttpContext.Session.GetObject<List<int>>("CARRITO") == null)
@@ -80,7 +81,7 @@ namespace TrabajoTiendaZapatillas.Controllers
 
 
 
-        /*[AuthorizationUsuarios]*/
+        //FUNCION PARA MOSTAR LOS OBJETOS GUARDADOS EN EL CARRITO Y PODER BORRARLOS
         public IActionResult Carrito(int? idzapatilla)
         {
             List<int> carrito = HttpContext.Session.GetObject<List<int>>("CARRITO");

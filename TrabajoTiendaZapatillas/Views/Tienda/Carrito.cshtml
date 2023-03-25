@@ -752,12 +752,14 @@ border-bottom-right-radius: 16px;
                               
                           </button>
                           
-                              <a asp-action="Carrito" asp-controller="Tienda" asp-route-idzapatilla="@zap.IdZapatilla" class="btn btn-info">Añadir a carrito</a>
+                              
                           
                   </div>
                   }
                   
-
+                  <button class="btn btn info">
+                                            <a asp-action="Pedidos" asp-controller="Tienda">Realizar Pedido</a>
+                  </button>
                   
                 </div>
               </div>
