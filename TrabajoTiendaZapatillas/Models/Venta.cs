@@ -29,6 +29,6 @@ namespace TrabajoTiendaZapatillas.Models
         public int Total { get; set; }
 
         [Column("NOMBREZAPATILLA")]
-        public int NombreZapatilla { get; set; }
+        public string NombreZapatilla { get; set; }
     }
 }

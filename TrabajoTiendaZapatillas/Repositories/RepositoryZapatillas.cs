@@ -62,42 +62,25 @@ namespace TrabajoTiendaZapatillas.Repositories
             return maximo;
         }
 
-       /* public Venta InsertVentas(int idZapatilla, int idUsuario, int numComprobante, DateTime fecha, int impuesto, int total)
+        public async Task InsertVentasAsync(int idZapatilla, int idUsuario, string numComprobante, DateTime fecha, int impuesto, int total, string nombre)
         {
             Venta venta = new Venta();
             
             int maximoIdVenta= this.GetMaximoIdVenta();
-            *//*venta.*//*
-        }*/
-        //conexion azure BBDD -> sqljavi.database.windows.net
+            
+            venta.IdVenta= this.GetMaximoIdVenta();
+            venta.IdZapatilla= idZapatilla;
+            venta.IdUsuario= idUsuario;
+            venta.NumeroComprobante = numComprobante;
+            venta.Fecha= fecha;
+            venta.Impuesto= impuesto;
+            venta.Total= total;
+            venta.NombreZapatilla = nombre;
 
+            this.context.Ventas.Add(venta);
 
-        /*       public async Task AgregarProductoAsync
-        (string titulo, int precio, string descripcion,
-        string imagen, int idartista)
-               {
-                   InfoArte prod = new InfoArte();
+            await this.context.SaveChangesAsync();
+        }
 
-
-
-                   int maximo = this.GetMaximoIdArtista();
-
-
-
-                   prod.IdInfoArte = maximo;
-                   prod.Titulo = titulo;
-                   prod.Precio = precio;
-                   prod.Descripcion = descripcion;
-                   prod.Imagen = imagen;
-                   prod.IdArtista = idartista;
-
-
-
-                   this.context.InfoArtes.Add(prod);
-
-
-
-                   await this.context.SaveChangesAsync();
-               }*/
     }
 }
