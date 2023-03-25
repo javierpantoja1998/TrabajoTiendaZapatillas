@@ -9,99 +9,101 @@
 </head>
 <body>
 	<style>
-		table {
-			width: 750px;
-			border-collapse: collapse;
-			margin: 50px auto;
+				html,
+		body {
+			height: 100%;
 		}
 
-		/* Zebra striping */
-		tr:nth-of-type(odd) {
-			background: #eee;
+		body {
+			margin: 0;
+			background: linear-gradient(45deg, #49a09d, #5f2c82);
+			font-family: sans-serif;
+			font-weight: 100;
+		}
+
+		.container {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		table {
+			width: 800px;
+			border-collapse: collapse;
+			overflow: hidden;
+			box-shadow: 0 0 20px rgba(0,0,0,0.1);
+		}
+
+		th,
+		td {
+			padding: 15px;
+			background-color: rgba(255,255,255,0.2);
+			color: #fff;
 		}
 
 		th {
-			background: #3498db;
-			color: white;
-			font-weight: bold;
-		}
-
-		td, th {
-			padding: 10px;
-			border: 1px solid #ccc;
 			text-align: left;
-			font-size: 18px;
 		}
 
-		@@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
-
-			table {
-				width: 100%;
+		thead {
+			th {
+				background-color: #55608f;
 			}
-			/* Force table to not be like tables anymore */
-			table, thead, tbody, th, td, tr {
-				display: block;
-			}
-				/* Hide table headers (but not display: none;, for accessibility) */
-				thead tr {
-					position: absolute;
-					top: -9999px;
-					left: -9999px;
-				}
+		}
 
+		tbody {
 			tr {
-				border: 1px solid #ccc;
-			}
-
-			td {
-				/* Behave  like a "row" */
-				border: none;
-				border-bottom: 1px solid #eee;
-				position: relative;
-				padding-left: 50%;
-			}
-
-				td:before {
-					/* Now like a table header */
-					position: absolute;
-					/* Top/left values mimic padding */
-					top: 6px;
-					left: 6px;
-					width: 45%;
-					padding-right: 10px;
-					white-space: nowrap;
-					/* Label the data */
-					content: attr(data-column);
-					color: #000;
-					font-weight: bold;
+				&:hover {
+					background-color: rgba(255,255,255,0.3);
 				}
+			}
+			td {
+				position: relative;
+				&:hover {
+					&:before {
+						content: "";
+						position: absolute;
+						left: 0;
+						right: 0;
+						top: -9999px;
+						bottom: -9999px;
+						background-color: rgba(255,255,255,0.2);
+						z-index: -1;
+					}
+				}
+			}
 		}
 	</style>
 
+<div class="container">
 	<table>
 		<thead>
 			<tr>
-				<th>Nombre</th>
-				<th>Talla</th>
-				<th>Precio</th>
-				<th>Imagen</th>
+				<th>MODELO</th>
+				<th>TALLA</th>
+				<th>PRECIO</th>
+				<th>IMAGEN</th>
+				
 			</tr>
 		</thead>
 		<tbody>
 			@foreach (Zapatilla zap in Model)
-			{
-				<tr>
-					<td data-column="First Name">@zap.Nombre</td>
-					<td data-column="Last Name">@zap.Talla</td>
-					<td data-column="Job Title">@zap.Precio</td>
-					<td data-column="Twitter">
-						<img src="@zap.Imagen" style="height:300px; width:250px">
-					</td>
-				</tr>
-			}
-
-
+				{
+			<tr>
+				<td>@zap.Nombre</td>
+				<td>@zap.Talla</td>
+				<td>@zap.Precio</td>
+				<td>
+					<img src="@zap.Imagen" style="width:250px; height:300px">
+				</td>
+				
+			</tr>
+				}
+			
 		</tbody>
 	</table>
+
+</div>
 </body>
 </html>
