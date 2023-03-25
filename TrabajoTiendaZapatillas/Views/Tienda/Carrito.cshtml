@@ -735,31 +735,26 @@ border-bottom-right-radius: 16px;
                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                       <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
                     </div>
-                  </div>
-                  <div class="pt-5">
-                    <h6 class="mb-0"><a href="#!" class="text-body"><i
-                          class="fas fa-long-arrow-alt-left me-2"></i>
-                          </a>
-                                <a asp-action="Index" asp-controller="Tienda" asp-route-idzapatilla="@zap.IdZapatilla">Volver a la tienda</a>
-
-                      </h6>
-                          <button class="btn btn-danger">
+                                                <h6 class="mb-0">
                                                     <a href="#!" class="text-body">
-                                                        <i class="fas fa-long-arrow-alt-left me-2">
-                                                            <a asp-action="Carrito" asp-controller="Tienda" asp-route-idzapatilla="@zap.IdZapatilla">Borrar</a>
-                                                        </i>
+                                                        <i class="fas fa-long-arrow-alt-left me-2"></i>
                                                     </a>
-                              
-                          </button>
-                          
-                              
-                          
+                                                    <a asp-action="Index" asp-controller="Tienda" asp-route-idzapatilla="@zap.IdZapatilla">Volver a la tienda</a>
+
+                                                </h6>
+
+                                                <a href="#!" class="text-body">
+                                                    <i class="fas fa-long-arrow-alt-left me-2">
+                                                        <a class="btn btn-danger" asp-action="Carrito" asp-controller="Tienda" asp-route-idzapatilla="@zap.IdZapatilla">Borrar</a>
+                                                    </i>
+                                                </a>
                   </div>
+               
                   }
                   
-                  <button class="btn btn info">
-                                            <a asp-action="Pedidos" asp-controller="Tienda">Realizar Pedido</a>
-                  </button>
+                  
+                       <a class="btn btn-info" asp-action="Pedidos" asp-controller="Tienda">Realizar Pedido</a>
+                 
                   
                 </div>
               </div>
