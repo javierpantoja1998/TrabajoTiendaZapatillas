@@ -82,26 +82,26 @@ namespace TrabajoTiendaZapatillas.Repositories
             await this.context.SaveChangesAsync();
         }
 
-		/*public async Task InsertComprassAsync
-            (string numTarjeta, string nombre,string apellidos, string dir,
-            string email, string numTel, int codigoPostal)
+		public async Task InsertComprasAsync
+            (string numerotarjeta, string nombre,string apellidos, string direccion,
+            string email, string numerotelefono, int codigopostal)
 		{
 			Compra compra = new Compra();
 
-			compra.NumeroTarjeta = numTarjeta;
+			compra.NumeroTarjeta = numerotarjeta;
             compra.Nombre = nombre;
             compra.Apellidos = apellidos;
-            compra.Direccion = dir;
+            compra.Direccion = direccion;
             compra.Email = email;
-            compra.NumeroTelefono = numTel;
-            compra.CodigoPostal = codigoPostal;
+            compra.NumeroTelefono = numerotelefono;
+            compra.CodigoPostal = codigopostal;
 			
 			
 
 			this.context.Compras.Add(compra);
 
 			await this.context.SaveChangesAsync();
-		}*/
+		}
 
 	}
 }

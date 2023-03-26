@@ -1,9 +1,9 @@
-﻿/*using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrabajoTiendaZapatillas.Models
 {
-	[Table("VENTAS")]
+	[Table("COMPRAS")]
 	public class Compra
 	{
 		[Key]
@@ -29,4 +29,3 @@ namespace TrabajoTiendaZapatillas.Models
 		public int CodigoPostal { get; set; }
 	}
 }
-*/
