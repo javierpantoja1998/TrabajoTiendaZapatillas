@@ -111,6 +111,10 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View(zapatillas);
         }
 
+        public IActionResult Compra()
+        {
+            return View();
+        }
 
 
     }
