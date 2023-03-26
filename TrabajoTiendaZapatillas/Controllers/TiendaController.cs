@@ -115,25 +115,19 @@ namespace TrabajoTiendaZapatillas.Controllers
         {
             return View();
         }
+		[HttpPost]
+		public IActionResult Compra(Compra compra)
+        {
+			this.repo.InsertComprasAsync(compra.NumeroTarjeta, compra.Nombre, compra.Apellidos, compra.Direccion, compra.Email, compra.NumeroTelefono, compra.CodigoPostal);
+
+			return RedirectToAction("PagoFinalizado");
+
+		}
 
 		public IActionResult PagoFinalizado()
 		{
 			return View();
 		}
 
-		public IActionResult CreateCompra()
-		{
-
-			return View();
-
-		}
-		[HttpPost]
-		public IActionResult CreateCompra(Compra compra)
-		{
-            this.repo.InsertComprasAsync(compra.NumeroTarjeta, compra.Nombre,compra.Apellidos, compra.Direccion, compra.Email, compra.NumeroTelefono, compra.CodigoPostal);
-			
-			return RedirectToAction("PagoFinalizado");
-
-		}
 	}
 }
