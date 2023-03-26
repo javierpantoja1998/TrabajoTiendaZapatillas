@@ -116,6 +116,9 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View();
         }
 
-
-    }
+		public IActionResult PagoFinalizado()
+		{
+			return View();
+		}
+	}
 }
