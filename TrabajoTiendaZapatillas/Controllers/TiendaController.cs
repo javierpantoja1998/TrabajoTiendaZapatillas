@@ -1,28 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TrabajoTiendaZapatillas.Filters;
-using TrabajoTiendaZapatillas.Models;
+
 using TrabajoTiendaZapatillas.Repositories;
 using TrabajoTiendaZapatillas.Extensions;
-
+using NuggetTiendaZapatillasJPL.Models;
+using TrabajoTiendaZapatillas.Services;
 
 namespace TrabajoTiendaZapatillas.Controllers
 {
     public class TiendaController : Controller
     {
+        private ServiceApiZapatillas service;
         private RepositoryZapatillas repo;
 
-
-        public TiendaController(RepositoryZapatillas repo)
+        public TiendaController(ServiceApiZapatillas service, RepositoryZapatillas repo)
         {
-            this.repo = repo;
+            this.service = service;
+            this.repo = repo;   
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<VistaZapatillasCategoria> zapatillasCategoriaBasketball = this.repo.zapatillasCategoria("BASKETBALL");
-            List<VistaZapatillasCategoria> zapatillasCategoriaFutbol = this.repo.zapatillasCategoria("FUTBOL");
-            List<VistaZapatillasCategoria> zapatillasCategoriaSkate = this.repo.zapatillasCategoria("SKATE");
-            List<VistaZapatillasCategoria> zapatillasCategoriaPremium = this.repo.zapatillasCategoria("PREMIUM");
+            List<VistaZapatillasCategoria> zapatillasCategoriaBasketball = await this.service.ZapatillasCategoriaAsync("BASKETBALL");
+            List<VistaZapatillasCategoria> zapatillasCategoriaFutbol = await this.service.ZapatillasCategoriaAsync("FUTBOL");
+            List<VistaZapatillasCategoria> zapatillasCategoriaSkate = await this.service.ZapatillasCategoriaAsync("SKATE");
+            List<VistaZapatillasCategoria> zapatillasCategoriaPremium = await this.service.ZapatillasCategoriaAsync("PREMIUM");
 
 
             ZapatillaCategoria zapatillaCategoria = new ZapatillaCategoria();
@@ -38,7 +39,7 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View(zapatillaCategoria);
         }
 
-        public IActionResult ZapatillaDetalles(int idZapatilla, int?  idZapatillaCarrito)
+        public async Task <IActionResult> ZapatillaDetalles(int idZapatilla, int?  idZapatillaCarrito)
         {
             if (idZapatillaCarrito != null)
                 //GUARDAMOS EL PRODUCTO EN EL CARRITO
@@ -57,7 +58,7 @@ namespace TrabajoTiendaZapatillas.Controllers
 
 
             }
-            Zapatilla zapatillas = this.repo.GetZapatillaId(idZapatilla);
+            Zapatilla zapatillas = await this.service.FindZapatillaAsync(idZapatilla);
             return View(zapatillas);
             
         }
@@ -69,9 +70,9 @@ namespace TrabajoTiendaZapatillas.Controllers
         }
 
         [HttpPost]
-        public IActionResult ZapatillasCategoria(string nombreCategoria) 
+        public async Task<IActionResult> ZapatillasCategoria(string nombreCategoria) 
         {
-            List<VistaZapatillasCategoria> zapatillasCategoria =  this.repo.zapatillasCategoria(nombreCategoria);
+            List<VistaZapatillasCategoria> zapatillasCategoria = await  this.service.ZapatillasCategoriaAsync(nombreCategoria);
             return View(zapatillasCategoria);
         }
 
@@ -115,14 +116,8 @@ namespace TrabajoTiendaZapatillas.Controllers
         {
             return View();
         }
-		[HttpPost]
-		public IActionResult Compra(Compra compra)
-        {
-			this.repo.InsertComprasAsync(compra.NumeroTarjeta, compra.Nombre, compra.Apellidos, compra.Direccion, compra.Email, compra.NumeroTelefono, compra.CodigoPostal);
-
-			return RedirectToAction("PagoFinalizado");
-
-		}
+		
+		
 
 		public IActionResult PagoFinalizado()
 		{

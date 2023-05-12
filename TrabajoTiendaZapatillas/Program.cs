@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using TrabajoTiendaZapatillas.Data;
+
 using TrabajoTiendaZapatillas.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,9 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 string connectionString = builder.Configuration.GetConnectionString("SqlZapatillas");
 builder.Services.AddTransient<RepositoryZapatillas>();
-builder.Services.AddTransient<RepositoryUsuarios>();
-builder.Services.AddDbContext<ZapatillasContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddDbContext<UsuariosContext>(options => options.UseSqlServer(connectionString));
 
 
 //SEGURIDAD
@@ -26,11 +23,6 @@ builder.Services.AddAuthentication(options =>
         config.AccessDeniedPath = "/Managed/ErrorAcceso";
     });
 
-
-
-//LLAMAMOS A NUESTRAS VISTAS
-
-//FUNCIONES DE CACHE Y SESSION
 
 builder.Services.AddSession();
 builder.Services.AddControllersWithViews(options =>

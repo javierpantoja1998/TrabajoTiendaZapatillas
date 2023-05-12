@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using NuggetTiendaZapatillasJPL.Models;
 using System.Numerics;
 using System.Security.Claims;
 using TrabajoTiendaZapatillas.Filters;
-using TrabajoTiendaZapatillas.Models;
 using TrabajoTiendaZapatillas.Repositories;
 
 namespace TrabajoTiendaZapatillas.Controllers
