@@ -93,7 +93,7 @@ namespace TrabajoTiendaZapatillas.Services
             using (HttpClient client = new HttpClient())
             {
 
-                string request = "/api/hospitales/" + id;
+                string request = "/api/Zapatillas/" + id;
 
                 client.BaseAddress = new Uri(this.UrlApiZapatillas);
 

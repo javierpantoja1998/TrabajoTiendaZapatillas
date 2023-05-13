@@ -1,22 +1,24 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NuggetTiendaZapatillasJPL.Models;
 using System.Numerics;
 using System.Security.Claims;
-using TrabajoTiendaZapatillas.Filters;
-using TrabajoTiendaZapatillas.Repositories;
+
+using TrabajoTiendaZapatillas.Services;
 
 namespace TrabajoTiendaZapatillas.Controllers
 {
     public class ManagedController : Controller
     {
-        private RepositoryUsuarios repo;
+        private ServiceApiUsuarios service;
 
-        public ManagedController(RepositoryUsuarios repo)
+        public ManagedController(ServiceApiUsuarios service)
         {
-            this.repo = repo;
+            this.service = service;
         }
+
 
         public IActionResult Login()
         {
@@ -24,70 +26,68 @@ namespace TrabajoTiendaZapatillas.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LogIn(string email, string password)
+        public async Task<IActionResult> Login
+     (string email, string password)
         {
-            Usuario usuario = await this.repo.ExisteUsuario(email, password);
-            if(usuario != null)
+            string token =
+                await this.service.GetTokenAsync(email, password);
+            if (token == null)
             {
-                ClaimsIdentity identity =
-               new ClaimsIdentity
-               (CookieAuthenticationDefaults.AuthenticationScheme
-               , ClaimTypes.Name, ClaimTypes.Role);
-                identity.AddClaim
-                   (new Claim(ClaimTypes.Name, usuario.Email));
-                identity.AddClaim
-                    (new Claim(ClaimTypes.NameIdentifier, usuario.Password.ToString()));
-
-                ClaimsPrincipal user = new ClaimsPrincipal(identity);
-
-                await HttpContext.SignInAsync
-                    (CookieAuthenticationDefaults.AuthenticationScheme
-                    , user);
-                
-
-                return RedirectToAction("Index", "Tienda");
+                ViewData["MENSAJE"] = "Email/Password incorrectos";
+                return View();
             }
             else
             {
-                ViewData["MENSAJE"] = "Usuario/Password incorrectos";
-                return View();
+                ViewData["MENSAJE"] = "Bienvenid@ a mi App!!!";
+                HttpContext.Session.SetString("TOKEN", token);
+                ClaimsIdentity identity =
+                    new ClaimsIdentity
+                    (CookieAuthenticationDefaults.AuthenticationScheme,
+                    ClaimTypes.Name, ClaimTypes.Role);
+                identity.AddClaim(new Claim(ClaimTypes.Name, email));
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, password));
+                ClaimsPrincipal userPrincipal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync
+                    (CookieAuthenticationDefaults.AuthenticationScheme
+                    , userPrincipal, new AuthenticationProperties
+                    {
+                        ExpiresUtc = DateTime.UtcNow.AddMinutes(30)
+                    });
+                return RedirectToAction("Index", "Zapatillas");
             }
         }
 
-        [AuthorizationUsuarios]
-        public IActionResult PerfilUsuario()
-        {
-            return View();
-        }
-
-        //LOG OUT
-        public async Task<IActionResult> LogOut()
+        public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync
                 (CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Tienda");
+            HttpContext.Session.Remove("TOKEN");
+            return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult AccesoDenegado()
+        public async Task<IActionResult> Register()
         {
             return View();
         }
 
-        public IActionResult Register()
-        {
-            return View();
-        }
 
         [HttpPost]
-        public async Task<IActionResult> Register
-            (string nombre, string dni, string direccion, string telefono, string email, string password)
+        public async Task<IActionResult> Register(string nombre, string dni, string direccion, string telefono, string email, byte[] password)
         {
-            Usuario user = new Usuario();
-            string fileName = user.IdUsuario.ToString();
+            await this.service.InsertUsuarioAsync(nombre, dni, direccion, telefono, email, password);
+            return RedirectToAction("Index", "Zapatillas");
+        }
 
-            await this.repo.RegisterUser(nombre, dni, direccion, telefono, email, password);
-            ViewData["MENSAJE"] = "Usuario regristado correctamente";
-            return View();
+        [Authorize]
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<ActionResult<Usuario>> PerfilUsuario()
+        {
+            string token =
+                HttpContext.Session.GetString("TOKEN");
+            Usuario user = await
+                this.service.GetPerfilUsuarioAsync(token);
+            return View(user);
         }
     }
 }

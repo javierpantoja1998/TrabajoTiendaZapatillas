@@ -1,15 +1,17 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-
+using TrabajoTiendaZapatillas.Data;
 using TrabajoTiendaZapatillas.Repositories;
+using TrabajoTiendaZapatillas.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-string connectionString = builder.Configuration.GetConnectionString("SqlZapatillas");
+string connectionString = builder.Configuration.GetConnectionString("SqlServer");
 builder.Services.AddTransient<RepositoryZapatillas>();
-
-
+builder.Services.AddDbContext<ZapatillasContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddTransient<ServiceApiUsuarios>();
+builder.Services.AddTransient<ServiceApiZapatillas>();
 //SEGURIDAD
 builder.Services.AddAuthentication(options =>
 {

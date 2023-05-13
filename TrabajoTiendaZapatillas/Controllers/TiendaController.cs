@@ -41,6 +41,7 @@ namespace TrabajoTiendaZapatillas.Controllers
 
         public async Task <IActionResult> ZapatillaDetalles(int idZapatilla, int?  idZapatillaCarrito)
         {
+            List<Zapatilla> productos = new List<Zapatilla>();
             if (idZapatillaCarrito != null)
                 //GUARDAMOS EL PRODUCTO EN EL CARRITO
             {
@@ -55,12 +56,15 @@ namespace TrabajoTiendaZapatillas.Controllers
                 }
                 carrito.Add(idZapatillaCarrito.Value);
                 HttpContext.Session.SetObject("CARRITO", carrito);
-
-
+                
+                foreach (int id in carrito)
+                {
+                    productos.Add(await this.service.FindZapatillaAsync(id));
+                   
+                }
+                
             }
-            Zapatilla zapatillas = await this.service.FindZapatillaAsync(idZapatilla);
-            return View(zapatillas);
-            
+            return View(productos);
         }
 
 
@@ -75,11 +79,6 @@ namespace TrabajoTiendaZapatillas.Controllers
             List<VistaZapatillasCategoria> zapatillasCategoria = await  this.service.ZapatillasCategoriaAsync(nombreCategoria);
             return View(zapatillasCategoria);
         }
-
-
-
-       
-
 
 
         //FUNCION PARA MOSTAR LOS OBJETOS GUARDADOS EN EL CARRITO Y PODER BORRARLOS
@@ -117,8 +116,6 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View();
         }
 		
-		
-
 		public IActionResult PagoFinalizado()
 		{
 			return View();
