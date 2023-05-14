@@ -123,7 +123,7 @@ namespace TrabajoTiendaZapatillas.Controllers
             string numerotelefono, int codigopostal)
         {
             await this.service.InsertCompraAsync(numerotarjeta,nombre,apellidos,direccion,email, numerotelefono, codigopostal);
-            return RedirectToAction("Index     c ", "Tienda");
+            return RedirectToAction("PagoFinalizado", "Tienda");
         }
 
         public IActionResult PagoFinalizado()
