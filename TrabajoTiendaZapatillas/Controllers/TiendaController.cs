@@ -39,12 +39,13 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View(zapatillaCategoria);
         }
 
-        public async Task <IActionResult> ZapatillaDetalles(int idZapatilla, int?  idZapatillaCarrito)
+        public async Task<IActionResult> ZapatillaDetalles(int idZapatilla, int? idZapatillaCarrito)
         {
-            List<Zapatilla> productos = new List<Zapatilla>();
+            Zapatilla producto = new Zapatilla();
+
             if (idZapatillaCarrito != null)
-                //GUARDAMOS EL PRODUCTO EN EL CARRITO
             {
+                //GUARDAMOS EL PRODUCTO EN EL CARRITO
                 List<int> carrito;
                 if (HttpContext.Session.GetObject<List<int>>("CARRITO") == null)
                 {
@@ -56,15 +57,16 @@ namespace TrabajoTiendaZapatillas.Controllers
                 }
                 carrito.Add(idZapatillaCarrito.Value);
                 HttpContext.Session.SetObject("CARRITO", carrito);
-                
-                foreach (int id in carrito)
-                {
-                    productos.Add(await this.service.FindZapatillaAsync(id));
-                   
-                }
-                
+
+                producto = await this.service.FindZapatillaAsync(idZapatillaCarrito.Value);
             }
-            return View(productos);
+            else
+            {
+                //MOSTRAMOS EL DETALLE DEL PRODUCTO
+                producto = await this.service.FindZapatillaAsync(idZapatilla);
+            }
+
+            return View(producto);
         }
 
 
@@ -115,8 +117,16 @@ namespace TrabajoTiendaZapatillas.Controllers
         {
             return View();
         }
-		
-		public IActionResult PagoFinalizado()
+
+        [HttpPost]
+        public async Task<IActionResult> Compra(string numerotarjeta, string nombre, string apellidos, string direccion, string email,
+            string numerotelefono, int codigopostal)
+        {
+            await this.service.InsertCompraAsync(numerotarjeta,nombre,apellidos,direccion,email, numerotelefono, codigopostal);
+            return RedirectToAction("Index     c ", "Tienda");
+        }
+
+        public IActionResult PagoFinalizado()
 		{
 			return View();
 		}

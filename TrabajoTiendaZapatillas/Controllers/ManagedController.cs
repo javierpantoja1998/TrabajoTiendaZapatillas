@@ -53,7 +53,7 @@ namespace TrabajoTiendaZapatillas.Controllers
                     {
                         ExpiresUtc = DateTime.UtcNow.AddMinutes(30)
                     });
-                return RedirectToAction("Index", "Zapatillas");
+                return RedirectToAction("Index", "Tienda");
             }
         }
 
@@ -62,7 +62,7 @@ namespace TrabajoTiendaZapatillas.Controllers
             await HttpContext.SignOutAsync
                 (CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Remove("TOKEN");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Tienda");
         }
 
         public async Task<IActionResult> Register()
@@ -72,22 +72,23 @@ namespace TrabajoTiendaZapatillas.Controllers
 
 
         [HttpPost]
+        
         public async Task<IActionResult> Register(string nombre, string dni, string direccion, string telefono, string email, byte[] password)
         {
             await this.service.InsertUsuarioAsync(nombre, dni, direccion, telefono, email, password);
-            return RedirectToAction("Index", "Zapatillas");
+            return RedirectToAction("Index", "Tienda");
         }
 
-        [Authorize]
-        [HttpGet]
-        [Route("[action]")]
-        public async Task<ActionResult<Usuario>> PerfilUsuario()
-        {
-            string token =
-                HttpContext.Session.GetString("TOKEN");
-            Usuario user = await
-                this.service.GetPerfilUsuarioAsync(token);
-            return View(user);
-        }
+        //[Authorize]
+        //[HttpGet]
+        //[Route("[action]")]
+        //public async Task<ActionResult<Usuario>> PerfilUsuario()
+        //{
+        //    string token =
+        //        HttpContext.Session.GetString("TOKEN");
+        //    Usuario user = await
+        //        this.service.GetPerfilUsuarioAsync(token);
+        //    return View(user);
+        //}
     }
 }

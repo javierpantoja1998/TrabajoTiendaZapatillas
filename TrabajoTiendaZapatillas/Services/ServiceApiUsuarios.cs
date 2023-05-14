@@ -105,7 +105,7 @@ namespace TrabajoTiendaZapatillas.Services
         {
             using (HttpClient client = new HttpClient())
             {
-                string request = "api/usuarios/Register";
+                string request = "api/Usuarios/Register";
                 client.BaseAddress = new Uri(this.UrlApiZapatillas);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(this.Header);
@@ -131,13 +131,13 @@ namespace TrabajoTiendaZapatillas.Services
         }
 
         //METODO PROTEGIDO PARA RECUPERAR EL PERFIL
-        public async Task<Usuario> GetPerfilUsuarioAsync
-            (string token)
-        {
-            string request = "/api/Usuarios/PerfilUsuario";
-            Usuario user = await
-                this.CallApiAsync<Usuario>(request, token);
-            return user;
-        }
+        //public async Task<Usuario> GetPerfilUsuarioAsync
+        //    (string token)
+        //{
+        //    string request = "/api/Usuarios/PerfilUsuario";
+        //    Usuario user = await
+        //        this.CallApiAsync<Usuario>(request, token);
+        //    return user;
+        //}
     }
 }

@@ -124,6 +124,40 @@ namespace TrabajoTiendaZapatillas.Services
             return zapatillas;
         }
 
-       
+        //METODO PARA HACER COMPRA
+        //METODO PARA CREAR UN NUEVO USUARIO
+        public async Task InsertCompraAsync
+        (string numerotarjeta, string nombre, string apellidos, string direccion, string email,
+            string numerotelefono, int codigopostal)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string request = "api/Zapatilas/Compra";
+                client.BaseAddress = new Uri(this.UrlApiZapatillas);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                //TENEMOS QUE ENVIAR UN OBJETO JSON
+                //NOS CREAMOS UN OBJETO DE LA CLASE DEPARTAMENTO
+                Compra compra = new Compra();
+
+                compra.NumeroTarjeta= numerotarjeta;
+                compra.Nombre= nombre;
+                compra.Apellidos= apellidos;
+                compra.Direccion= direccion;
+                compra.Email= email;
+                compra.NumeroTelefono= numerotelefono;
+                compra.CodigoPostal= codigopostal;
+
+                //CONVERTIMOS EL OBJETO A JSON
+                string json = JsonConvert.SerializeObject(compra);
+
+                StringContent content =
+                    new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response =
+                    await client.PostAsync(request, content);
+            }
+        }
+
+
     }
 }
