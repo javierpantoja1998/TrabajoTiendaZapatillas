@@ -113,6 +113,7 @@ namespace TrabajoTiendaZapatillas.Controllers
             return View(zapatillas);
         }
 
+        [HttpGet]
         public IActionResult Compra()
         {
             return View();
@@ -120,9 +121,9 @@ namespace TrabajoTiendaZapatillas.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Compra(string numerotarjeta, string nombre, string apellidos, string direccion, string email,
-            string numerotelefono, int codigopostal)
+                string tel, int cp)
         {
-            await this.service.InsertCompraAsync(numerotarjeta,nombre,apellidos,direccion,email, numerotelefono, codigopostal);
+            await this.service.InsertCompraAsync(numerotarjeta, nombre, apellidos, direccion, email, tel, cp);
             return RedirectToAction("PagoFinalizado", "Tienda");
         }
 

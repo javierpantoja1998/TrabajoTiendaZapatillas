@@ -126,35 +126,35 @@ namespace TrabajoTiendaZapatillas.Services
 
         //METODO PARA HACER COMPRA
         //METODO PARA CREAR UN NUEVO USUARIO
-        public async Task InsertCompraAsync
-        (string numerotarjeta, string nombre, string apellidos, string direccion, string email,
-            string numerotelefono, int codigopostal)
+        public async Task InsertCompraAsync(string numerotarjeta, string nombre, string apellidos, string direccion, string email, string numerotelefono, int codigopostal)
         {
-            using (HttpClient client = new HttpClient())
+            using (var httpClient = new HttpClient())
             {
-                string request = "api/Zapatilas/Compra";
-                client.BaseAddress = new Uri(this.UrlApiZapatillas);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Header);
-                //TENEMOS QUE ENVIAR UN OBJETO JSON
-                //NOS CREAMOS UN OBJETO DE LA CLASE DEPARTAMENTO
-                Compra compra = new Compra();
+                var requestUrl = $"api/zapatillas/compra/{numerotarjeta}/{nombre}/{apellidos}/{direccion}/{numerotelefono}/{email}/{numerotelefono}/{codigopostal}";
 
-                compra.NumeroTarjeta= numerotarjeta;
-                compra.Nombre= nombre;
-                compra.Apellidos= apellidos;
-                compra.Direccion= direccion;
-                compra.Email= email;
-                compra.NumeroTelefono= numerotelefono;
-                compra.CodigoPostal= codigopostal;
+                // Crea el objeto que se enviará como cuerpo de la petición
+                var content = new StringContent(string.Empty);
 
-                //CONVERTIMOS EL OBJETO A JSON
-                string json = JsonConvert.SerializeObject(compra);
+                // Configura las cabeceras de la petición
+                httpClient.BaseAddress = new Uri(this.UrlApiZapatillas);
+                httpClient.DefaultRequestHeaders.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                StringContent content =
-                    new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response =
-                    await client.PostAsync(request, content);
+                // Convierte el objeto a JSON
+                var compra = new { NumeroTarjeta = numerotarjeta, Nombre = nombre, Apellidos = apellidos, Direccion = direccion, Email = email, NumeroTelefono = numerotelefono, CodigoPostal = codigopostal };
+                var json = JsonConvert.SerializeObject(compra);
+
+                // Crea el objeto de contenido de la petición
+                content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // Realiza la petición POST
+                var response = await httpClient.PostAsync(requestUrl, content);
+
+                // Maneja la respuesta si es necesario
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"La petición a {requestUrl} falló con el código de estado {response.StatusCode}");
+                }
             }
         }
 

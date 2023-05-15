@@ -105,7 +105,7 @@ namespace TrabajoTiendaZapatillas.Services
         {
             using (HttpClient client = new HttpClient())
             {
-                string request = "api/Usuarios/Register";
+                string request = "api/Usuarios/Register/" + nombre + "/" + dni + "/" + direccion + "/" + telefono + "/" + email + "/" + password;
                 client.BaseAddress = new Uri(this.UrlApiZapatillas);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(this.Header);
