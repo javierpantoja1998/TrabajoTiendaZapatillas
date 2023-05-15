@@ -73,7 +73,7 @@ namespace TrabajoTiendaZapatillas.Controllers
 
         [HttpPost]
         
-        public async Task<IActionResult> Register(string nombre, string dni, string direccion, string telefono, string email, byte[] password)
+        public async Task<IActionResult> Register(string nombre, string dni, string direccion, string telefono, string email, string password)
         {
             await this.service.InsertUsuarioAsync(nombre, dni, direccion, telefono, email, password);
             return RedirectToAction("Index", "Tienda");

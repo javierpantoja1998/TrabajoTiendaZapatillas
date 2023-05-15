@@ -101,7 +101,7 @@ namespace TrabajoTiendaZapatillas.Services
 
         //METODO PARA CREAR UN NUEVO USUARIO
         public async Task InsertUsuarioAsync
-        (string nombre, string dni, string direccion, string telefono, string email, byte[] password)
+        (string nombre, string dni, string direccion, string telefono, string email, string password)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -111,22 +111,8 @@ namespace TrabajoTiendaZapatillas.Services
                 client.DefaultRequestHeaders.Accept.Add(this.Header);
                 //TENEMOS QUE ENVIAR UN OBJETO JSON
                 //NOS CREAMOS UN OBJETO DE LA CLASE DEPARTAMENTO
-                Usuario user = new Usuario();
-
-                user.Nombre = nombre;
-                user.Dni = dni;
-                user.Direccion = direccion;
-                user.Telefono = telefono;
-                user.Email = email;
-                user.Password = password;
-
-                //CONVERTIMOS EL OBJETO A JSON
-                string json = JsonConvert.SerializeObject(user);
-
-                StringContent content =
-                    new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response =
-                    await client.PostAsync(request, content);
+                    await client.PostAsync(request, null);
             }
         }
 
